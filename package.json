@@ -29,6 +29,7 @@
     "express-jwt": "^6.0.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.19",
     "material-ui": "^0.20.2",
     "material-ui-icons": "^1.0.0-beta.36",
     "mongoose": "^5.9.23",
