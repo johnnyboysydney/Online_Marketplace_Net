@@ -1,7 +1,7 @@
 // Dependencies 
 import User from '../models/user.model'
 import _ from 'lodash'
-import errorHandler from './error.controller'
+import errorHandler from './../helpers/dbErrorHandler'
 
 const create = async (req, res) => {
     const user = new User(req.body)
