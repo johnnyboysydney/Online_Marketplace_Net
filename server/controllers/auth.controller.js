@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 import config from './../../config/config'
 
+const jwtExpirySeconds = 300
+
 const signin = async (req, res) => {
     try {
         let user = await User.findOne({ "email": req.body.email })
@@ -11,8 +13,13 @@ const signin = async (req, res) => {
         if (!user.authenticate(req.body.password)){
             return res.status('401').send({ error: "Email and password don't match" })
         }
-        const token = jwt.sign({ _id: user._id }, config.jwtSecret)
-        res.cookie('t',token, { expire: new Date() + 9999 })
+        // Create a new token with the username in the payload
+	    // and which expires 300 seconds after issue
+        const token = jwt.sign({ _id: user._id }, config.jwtSecret, {
+            algorithm: "HS256",
+            expiresIn: jwtExpirySeconds,
+        })
+        res.cookie('token',token, { maxAge: jwtExpirySeconds * 1000 })
         return res.json({
             token,
             user: {
@@ -27,16 +34,17 @@ const signin = async (req, res) => {
 }
 
 const signout = (req, res) => {
-    res.clearCookie('t')
+    res.clearCookie('token')
     return res.status('200').json({
         message: "Signed out"
     })
 }
 
+
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
     userProperty: 'auth'
-})
+  })
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.authenticate
