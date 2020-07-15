@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 import config from './../../config/config'
 
-const jwtExpirySeconds = 300
+const jwtExpirySeconds = 300;
 
 const signin = async (req, res) => {
     try {
@@ -15,11 +15,10 @@ const signin = async (req, res) => {
         }
         // Create a new token with the username in the payload
 	    // and which expires 300 seconds after issue
-        const token = jwt.sign({ _id: user._id }, config.jwtSecret, {
-            algorithm: "HS256",
-            expiresIn: jwtExpirySeconds,
-        })
-        res.cookie('token',token, { maxAge: jwtExpirySeconds * 1000 })
+        const token = jwt.sign({ _id: user._id }, config.jwtSecret)
+
+        res.cookie('t', token, { expire: new Date() + 9999 })
+        
         return res.json({
             token,
             user: {
@@ -40,11 +39,12 @@ const signout = (req, res) => {
     })
 }
 
-
-const requireSignin = expressJwt({
+const requireSignin = expressJwt({ 
     secret: config.jwtSecret,
-    userProperty: 'auth'
-  })
+    //userProperty: 'auth',
+    algorithm: ["HS256"],
+    //expiresIn: jwtExpirySeconds,
+})
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.authenticate
