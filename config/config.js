@@ -1,11 +1,3 @@
-const dotenv = require("dotenv");
-
-// get config vars
-dotenv.config();
-
-// access config var
-process.env.TOKEN_SECRET;
-
 const config = {
     env: process.env.NODE_ENV || 'development',
     port: process.env.PORT || 3000,
