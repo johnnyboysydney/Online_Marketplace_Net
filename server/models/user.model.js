@@ -27,7 +27,14 @@ const UserSchema = new mongoose.Schema({
     created: {
       type: Date,
       default: Date.now
-    }
+    },
+    // The seller type
+    seller: {
+      type: Boolean,
+      default: false
+    },
+    stripe_seller: {},
+    stripe_customer: {}
 })
 
 // The password string that's provided by the user it is handled as a virtual field.
