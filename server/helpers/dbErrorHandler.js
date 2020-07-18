@@ -1,6 +1,8 @@
 'use strict'
-// Mongoose error handling
-// Get unique error field name
+
+/**
+ * Get unique error field name
+ */
 const getUniqueErrorMessage = (err) => {
     let output
     try {
@@ -13,8 +15,9 @@ const getUniqueErrorMessage = (err) => {
     return output
 }
 
-// Parse and return the error message associated with
-// the specific validation error or other errors.
+/**
+ * Get the error message from error object
+ */
 const getErrorMessage = (err) => {
     let message = ''
 
@@ -36,4 +39,4 @@ const getErrorMessage = (err) => {
     return message
 }
 
-export default {getErrorMessage};
+export default {getErrorMessage}
