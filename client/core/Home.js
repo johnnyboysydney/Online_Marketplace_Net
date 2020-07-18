@@ -24,11 +24,13 @@ class Home extends Component {
     const {classes} = this.props
     return (
         <Card className={classes.card}>
-          <Typography >
+          <Typography type="headline" component="h2" className={classes.title}>
+            Home Page
           </Typography>
-          <CardMedia className={classes.media} />
+          <CardMedia className={classes.media} image={marketplaceImg} title="Marketplace"/>
           <CardContent>
-            <Typography >
+            <Typography type="body1" component="p">
+            Welcome to the Online Market Place.
             </Typography>
           </CardContent>
         </Card>
