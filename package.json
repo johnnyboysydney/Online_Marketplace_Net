@@ -22,7 +22,7 @@
   "homepage": "https://github.com/johnnyboysydney/Online_Marketplace_Net#readme",
   "main": "./server/server.js",
   "scripts": {
-    "development": "nodemon",
+    "dev": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "start": "NODE_ENV=production node ./dist/server.generated.js"
   },
