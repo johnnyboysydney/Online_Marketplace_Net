@@ -9,16 +9,16 @@ import {indigo, pink} from 'material-ui/colors'
 const theme = createMuiTheme({ 
   palette: {
     primary:{
-      light: '',
-      main: '',
-      dark: '',
+      light: '#0979C9',
+      main: '#2874A6',
+      dark: '#0923C9',
       contrastText: ''
     },
     secondary: {
-      light: '',
-      main: '',
-      dark: '',
-      contrastText: '',
+      light: '#EE96D7',
+      main: '#8F09C9',
+      dark: '#4809C9',
+      contrastText: '#000',
     },
     openTitle: indigo['400'],
     protectedTitle: pink['400'],
