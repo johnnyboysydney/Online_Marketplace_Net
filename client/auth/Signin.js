@@ -32,6 +32,22 @@ class Signin extends Component {
         error: '',
         redirectToReferrer: false
     }
+    clickSubmit = () => {
+        const user = {
+          email: this.state.email || undefined,
+          password: this.state.password || undefined
+        }
+    
+        signin(user).then((data) => {
+          if (data.error) {
+            this.setState({error: data.error})
+          } else {
+            auth.authenticate(data, () => {
+              this.setState({redirectToReferrer: true})
+            })
+          }
+        })
+    }
   
 }
 
