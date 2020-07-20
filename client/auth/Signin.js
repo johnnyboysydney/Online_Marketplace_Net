@@ -1,6 +1,15 @@
 import React, {Component} from 'react'
 import Card, {CardActions, CardContent} from 'material-ui/Card'
 import Button from 'material-ui/Button'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import Icon from 'material-ui/Icon'
+import PropTypes from 'prop-types'
+import {withStyles} from 'material-ui/styles'
+import auth from './../auth/auth-helper'
+import {Redirect} from 'react-router-dom'
+import {signin} from './api-auth.js'
+
 
 const styles = theme => ({ 
     card: {
@@ -62,6 +71,16 @@ class Signin extends Component {
         if (redirectToReferrer) {
             return (<Redirect to ={from}/>)
         }
+        
+        return (
+            <Card>
+                <CardContent>
+                    <Typography>
+                        Sign In
+                    </Typography>
+                </CardContent>
+            </Card>
+        )
     }
   
 }
