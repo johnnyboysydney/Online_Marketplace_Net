@@ -19,7 +19,7 @@ const auth = {
           sessionStorage.removeItem('jwt')
         cb()
         signout().then((data) => {
-            document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+            document.cookie = "t=; expires=Thu, 01 Jan 2021 00:00:00 UTC; path=/;"
         })
     }
 }
