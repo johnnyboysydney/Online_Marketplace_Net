@@ -19,6 +19,9 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 5,
         paddingBottom: theme.spacing.unit * 2
     },
+    error: {
+        verticalAlign: 'middle'
+    },
     title: {
         marginTop: theme.spacing.unit * 2,
         color: theme.palette.openTitle
@@ -78,7 +81,18 @@ class Signin extends Component {
                     <Typography>
                         Sign In
                     </Typography>
+                    <TextField />
+                    <TextField />
+                    <br/> {
+                      this.state.error && (<Typography component="p" color="error">
+                      <Icon color="error" className={classes.error}>error</Icon>
+                      {this.state.error}
+                      </Typography>)
+                    }
                 </CardContent>
+                <CardActions>
+                    <Button> </Button>
+                </CardActions>
             </Card>
         )
     }
