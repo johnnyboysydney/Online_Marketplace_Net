@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import auth from './../auth/auth-helper'
 import {Redirect} from 'react-router-dom'
-import {signin} from './api-auth.js'
+import {signin} from './temp/api-auth.js'
 
 const styles = theme => ({
   card: {
