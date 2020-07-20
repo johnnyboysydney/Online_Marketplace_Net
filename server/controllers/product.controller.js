@@ -1,6 +1,6 @@
-import Product from '../models/product.model'
+//import Product from '../models/product.model'
 import _ from 'lodash'
-import errorHandler from './../helpers/dbErrorHandler'
+//import errorHandler from './../helpers/dbErrorHandler'
 import formidable from 'formidable'
 import fs from 'fs'
 
