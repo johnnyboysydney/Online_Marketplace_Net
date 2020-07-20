@@ -13,6 +13,13 @@ import Shops from './shop/Shops'
 import MyShops from './shop/MyShops'
 import Shop from './shop/Shop'
 import EditShop from './shop/EditShop'
+import NewProduct from './product/NewProduct'
+import EditProduct from './product/EditProduct'
+import Product from './product/Product'
+import Cart from './cart/Cart'
+import StripeConnect from './user/StripeConnect'
+import ShopOrders from './order/ShopOrders'
+import Order from './order/Order'
 
 class MainRouter extends Component {
   // Removes the server-side injected CSS when React component mounts
