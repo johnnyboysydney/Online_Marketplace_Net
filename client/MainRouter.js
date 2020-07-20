@@ -54,6 +54,8 @@ class MainRouter extends Component {
         <PrivateRoute path="/seller/shop/edit/:shopId" component={EditShop}/>
         <PrivateRoute path="/seller/:shopId/products/new" component={NewProduct}/>
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct}/>
+        
+        <Route path="/seller/stripe/connect" component={StripeConnect}/>
       </Switch>
     </div>)
   }
