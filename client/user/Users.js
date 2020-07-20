@@ -3,6 +3,16 @@ import PropTypes from 'prop-types'
 import {withStyles, typography} from 'material-ui/styles'
 import { List } from 'material-ui'
 
+const styles = theme => ({
+    root: theme.mixins.gutters({
+      padding: theme.spacing.unit,
+      margin: theme.spacing.unit * 5
+    }),
+    title: {
+      margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+      color: theme.palette.openTitle
+    }
+  })
 
 class Users extends Component {
     state = {
@@ -30,7 +40,7 @@ class Users extends Component {
                     return <Link>
                         <ListItem button>
                             <ListItemAvatar>
-                                
+
                             </ListItemAvatar>
                         </ListItem>
                     </Link>
