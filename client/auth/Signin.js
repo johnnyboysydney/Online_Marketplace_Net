@@ -6,9 +6,9 @@ import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
-import auth from './../auth/auth-helper'
+import auth from './auth-helper'
 import {Redirect} from 'react-router-dom'
-import {signin} from './temp/api-auth.js'
+import {signin} from './api-auth.js'
 
 const styles = theme => ({
   card: {
