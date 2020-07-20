@@ -12,3 +12,13 @@ const signin = (user) => {
         return response.json()
     }).catch((err) => console.log(err))
 }
+
+const signout =() => {
+    return fetch('/auth/signout', {
+        method: 'GET',
+    }).then(reponse => {
+        return response.json()
+    }).catch((err) => console.log(err))
+}
+
+export {signin, signout}
