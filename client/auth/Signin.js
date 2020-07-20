@@ -51,7 +51,18 @@ class Signin extends Component {
     handleChange = name => event => {
         this.setState({[name]: event.target.value})
     }
-    
+    render() {
+        const {classes} = this.props
+        const {from} = this.props.location.state || {
+            from: {
+                pathname: '/'
+            }
+        }
+        const {redirectToReferrer} = this.state
+        if (redirectToReferrer) {
+            return (<Redirect to ={from}/>)
+        }
+    }
   
 }
 
