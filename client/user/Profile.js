@@ -11,9 +11,12 @@ import Edit from 'material-ui-icons/Edit'
 import Person from 'material-ui-icons/Person'
 import Divider from 'material-ui/Divider'
 import DeleteUser from './DeleteUser'
-import auth from '../auth/auth-helper'
+import auth from './../auth/auth-helper'
 import {read} from './api-user.js'
 import {Redirect, Link} from 'react-router-dom'
+import config from './../../config/config'
+import stripeButton from './../assets/images/stripeButton.png'
+import MyOrders from './../order/MyOrders'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -25,6 +28,13 @@ const styles = theme => ({
   title: {
     margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
     color: theme.palette.protectedTitle
+  },
+  stripe_connect: {
+    marginRight: '10px',
+  },
+  stripe_connected: {
+    verticalAlign: 'super',
+    marginRight: '10px'
   }
 })
 
@@ -74,15 +84,25 @@ class Profile extends Component {
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={this.state.user.name} secondary={this.state.user.email}/> {
-             auth.isAuthenticated().user && auth.isAuthenticated().user._id == this.state.user._id && 
-              (<ListItemSecondaryAction>
-                <Link to={"/user/edit/" + this.state.user._id}>
-                  <IconButton aria-label="Edit" color="primary">
-                    <Edit/>
-                  </IconButton>
-                </Link>
-                <DeleteUser userId={this.state.user._id}/>
-              </ListItemSecondaryAction>)
+             auth.isAuthenticated().user && auth.isAuthenticated().user._id == this.state.user._id &&
+             (<ListItemSecondaryAction>
+               {this.state.user.seller &&
+                 (this.state.user.stripe_seller
+                   ? (<Button variant="raised" disabled className={classes.stripe_connected}>
+                       Stripe connected
+                      </Button>)
+                   : (<a href={"https://connect.stripe.com/oauth/authorize?response_type=code&client_id="+config.stripe_connect_test_client_id+"&scope=read_write"} className={classes.stripe_connect}>
+                       <img src={stripeButton}/>
+                      </a>)
+                  )
+                }
+               <Link to={"/user/edit/" + this.state.user._id}>
+                 <IconButton aria-label="Edit" color="primary">
+                   <Edit/>
+                 </IconButton>
+               </Link>
+               <DeleteUser userId={this.state.user._id}/>
+             </ListItemSecondaryAction>)
             }
           </ListItem>
           <Divider/>
@@ -91,6 +111,7 @@ class Profile extends Component {
               new Date(this.state.user.created)).toDateString()}/>
           </ListItem>
         </List>
+        <MyOrders/>
       </Paper>
     )
   }
