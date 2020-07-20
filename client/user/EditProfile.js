@@ -9,6 +9,9 @@ import {withStyles} from 'material-ui/styles'
 import auth from '../auth/auth-helper'
 import {read, update} from './api-user.js'
 import {Redirect} from 'react-router-dom'
+import { FormControlLabel } from 'material-ui/Form'
+import Switch from 'material-ui/Switch'
+
 
 const styles = theme => ({
   card: {
@@ -83,6 +86,9 @@ class EditProfile extends Component {
   handleChange = name => event => {
     this.setState({[name]: event.target.value})
   }
+  handleCheck = (event, checked) => {
+    this.setState({'seller': checked})
+  }
   render() {
     const {classes} = this.props
     if (this.state.redirectToProfile) {
@@ -97,6 +103,20 @@ class EditProfile extends Component {
           <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
           <TextField id="password" type="password" label="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
+          <Typography type="subheading" component="h4" className={classes.subheading}>
+            Seller Account
+          </Typography>
+          <FormControlLabel
+            control={
+              <Switch classes={{
+                                checked: classes.checked,
+                                bar: classes.bar,
+                              }}
+                      checked={this.state.seller}
+                      onChange={this.handleCheck}
+              />}
+            label={this.state.seller? 'Active' : 'Inactive'}
+          />  
           <br/> {
             this.state.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>
