@@ -32,22 +32,33 @@ class Users extends Component {
     render() {
         const {classes} = this.props
         return (
-            <Paper>
-                <Typography>
-                    All Users
-                </Typography>
-                <List>
-                    return <Link>
+          <Paper className={classes.root} elevation={4}>
+            <Typography type="title" className={classes.title}>
+              All Users
+            </Typography>
+            <List dense>
+             {this.state.users.map((item, i) => {
+              return <Link to={"/user/" + item._id} key={i}>
                         <ListItem button>
-                            <ListItemAvatar>
-
-                            </ListItemAvatar>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <Person/>
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText primary={item.name}/>
+                          <ListItemSecondaryAction>
+                          <IconButton>
+                              <ArrowForward/>
+                          </IconButton>
+                          </ListItemSecondaryAction>
                         </ListItem>
-                    </Link>
-                </List>
-            </Paper>
-    )
-  }
+                     </Link>
+                   })
+                 }
+            </List>
+          </Paper>
+        )
+    }
 }
 
 
