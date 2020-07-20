@@ -30,7 +30,7 @@ class Home extends Component {
           <CardMedia className={classes.media} image={marketplaceImg} title="Marketplace"/>
           <CardContent>
             <Typography type="body1" component="p">
-            Welcome to the Online Market Place.
+              Welcome to the Online Market Place.
             </Typography>
           </CardContent>
         </Card>
