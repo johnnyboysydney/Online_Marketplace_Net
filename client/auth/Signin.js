@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
-import auth from './auth-helper'
+import auth from './../auth/auth-helper'
 import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
