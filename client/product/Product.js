@@ -10,3 +10,37 @@ import {Link} from 'react-router-dom'
 import Suggestions from './../product/Suggestions'
 import AddToCart from './../cart/AddToCart'
 
+const styles = theme => ({})
+
+class Product extends Component {
+    loadProduct = (productId) => {
+
+    }
+    
+    componentDidMount = () => {
+        this.loadProduct(this.match.params.productId)
+    }
+    
+    componentWillReceiveProps = (props) => {
+        this.loadProduct(props.match.params.productId)
+    }
+    
+    render() {
+        const imageUrl = this.state.product._id
+            ? `/api/product/image/${this.state.product._id}?${new Date().getTime()}`
+            : '/api/product/defaultphoto'
+        const {classes} = this.props
+        return (
+            <div>
+                
+            </div>
+        )
+    }
+}
+
+
+Product.propTypes = {
+    classes: PropTypes.object.isRequired
+}
+  
+export default withStyles(styles)(Product)
