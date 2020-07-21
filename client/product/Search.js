@@ -61,9 +61,16 @@ class Search extends Component {
                             </MenuItem>
                         ))}
                     </TextField>
-                    <TextField />
-
-                    <Button>
+                    <TextField 
+                        id = "search"
+                        label = "Search products"
+                        type = "search"
+                        onKeyDown = { this.enterKey }
+                        onChange = { this.handleChange('search') }
+                        className = { classes.searchField }
+                        margin = "margin"
+                    />
+                    <Button variant = "raised" color = { 'primary' } className = { classes.searchButton } onClick = { this.search } >
                         <SearchIcon />
                     </Button>
                     <Divider />
