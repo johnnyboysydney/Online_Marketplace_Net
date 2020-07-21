@@ -1,7 +1,15 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Paper } from 'material-ui'
-import Typography from 'material-ui/styles/typography'
+import {withStyles} from 'material-ui/styles'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
+import IconButton from 'material-ui/IconButton'
+import {Link} from 'react-router-dom'
+import ViewIcon from 'material-ui-icons/Visibility'
+import Icon from 'material-ui/Icon'
+import Divider from 'material-ui/Divider'
+import Card, { CardContent, CardMedia } from 'material-ui/Card'
+import AddToCart from './../cart/AddToCart'
 
 const styles = theme => ({
 
