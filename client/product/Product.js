@@ -13,6 +13,15 @@ import AddToCart from './../cart/AddToCart'
 const styles = theme => ({})
 
 class Product extends Component {
+    constructor({match}) {
+        super()
+        this.state = {
+          product: {shop: {}},
+          suggestions: [],
+          suggestionTitle: 'Related Products'
+        }
+        this.match = match
+    }
     loadProduct = (productId) => {
         read({ productId: productId }).then((data) => {
             if (data.error) {
