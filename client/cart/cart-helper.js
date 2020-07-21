@@ -14,7 +14,7 @@ const cart = {
     removeItem(){
 
     },
-    exptyCart(){
+    emptyCart(){
 
     }
 }
