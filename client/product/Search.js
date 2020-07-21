@@ -61,6 +61,13 @@ class Search extends Component {
                             </MenuItem>
                         ))}
                     </TextField>
+                    <TextField />
+
+                    <Button>
+                        <SearchIcon />
+                    </Button>
+                    <Divider />
+                    <Products Products = { this.state.results } searched = { this.state.searched } />
                 </Card>
             </div>
         )
