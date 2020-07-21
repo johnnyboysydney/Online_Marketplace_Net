@@ -28,10 +28,43 @@ class Search extends Component {
     }
 
     search = () => {
-        if (this.state.search) {
-            list({})
+        if(this.state.search){
+          list({
+            search: this.state.search || undefined, category: this.state.category
+          })
+          .then((data) => {
+            if (data.error) {
+              console.log(data.error)
+            } else {
+              this.setState({results: data, searched:true})
+            }
+          })
         }
     }
+
+    enterKey = (event) => {
+
+    }
+
+    render() {
+        const { classes } = this.props
+        return (
+            <div>
+                <Card className = { classes.card }>
+                    <TextField>
+                        <MenuItem>
+                            All
+                        </MenuItem>
+                        { this.props.categories.map(Option => (
+                            <MenuItem>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </Card>
+            </div>
+        )
+    }    
 }
 
 Search.propTypes = {
