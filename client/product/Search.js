@@ -43,7 +43,10 @@ class Search extends Component {
     }
 
     enterKey = (event) => {
-
+        if(event.keyCode == 13){
+            event.preventDefault()
+            this.search()
+        }
     }
 
     render() {
