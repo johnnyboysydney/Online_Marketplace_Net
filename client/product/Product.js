@@ -14,7 +14,21 @@ const styles = theme => ({})
 
 class Product extends Component {
     loadProduct = (productId) => {
-
+        read({ productId: productId }).then((data) => {
+            if (data.error) {
+               this.state({ error: data.error })
+            } else {
+               this.setState({ product: data })
+               listRelated({ productId: data._id })
+               .then((data) => {
+                   if (data.error) {
+                       console.log(data.error)
+                   } else {
+                       this.setState({ suggestions: data })
+                   }
+               })
+            }
+        })
     }
     
     componentDidMount = () => {
