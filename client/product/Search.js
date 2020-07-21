@@ -51,12 +51,24 @@ class Search extends Component {
         return (
             <div>
                 <Card className = { classes.card }>
-                    <TextField>
-                        <MenuItem>
+                    <TextField 
+                        id = "select-category"
+                        select
+                        label= "Select category"
+                        className={classes.textField}
+                        value={this.state.category}
+                        onChange={this.handleChange('category')}
+                        SelectProps={{
+                            MenuProps: {
+                            className: classes.menu,
+                            },
+                        }}
+                        margin="normal">
+                        <MenuItem value = "All">
                             All
                         </MenuItem>
-                        { this.props.categories.map(Option => (
-                            <MenuItem>
+                        { this.props.categories.map(option => (
+                            <MenuItem key={option} value={option}>
                                 {option}
                             </MenuItem>
                         ))}
