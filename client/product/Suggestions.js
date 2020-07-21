@@ -12,7 +12,11 @@ import Card, { CardContent, CardMedia } from 'material-ui/Card'
 import AddToCart from './../cart/AddToCart'
 
 const styles = theme => ({
-
+    title: {
+        margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+        color: theme.palette.openTitle,
+        fontSize: '1.1em'
+    }
 })
 
 class Suggestions extends Component {
@@ -20,10 +24,41 @@ class Suggestions extends Component {
         const { classes } = this.props
         return (
             <div>
-                <Paper className = { classes.root } >
+                <Paper className = { classes.root } elevation={4}>
                     <Typography type = "title" className = { classes.title } >
                         { this.props.title }
                     </Typography>
+                    {this.props.products.map((item, i) => {
+                        return 
+                          <span key = {i}>
+                            <Card className = { classes.Card } >
+                                <CardMedia />
+                                <div className = { classes.details }>
+                                    <CardContent className = { classes.content }>
+                                        <Link></Link>
+                                        <Link>
+                                            <Typography></Typography>
+                                        </Link>
+                                        <Typography>
+                                            Added on
+                                        </Typography>
+                                    </CardContent>
+                                    <div className = { classes.controls }>
+                                        <Typography></Typography>
+                                            <span>
+                                                <Link>
+                                                <IconButton>
+                                                    <ViewIcon />
+                                                </IconButton>
+                                                </Link>
+                                                <AddToCart />
+                                            </span>
+                                    </div>
+                                </div>
+                            </Card>
+                            <Divider />
+                          </span>
+                    })},
                 </Paper>
             </div>
         )
