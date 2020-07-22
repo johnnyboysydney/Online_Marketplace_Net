@@ -25,7 +25,10 @@ class Checkout extends Component {
           error: ''
     }
 
-    componentDidMount = () => {}
+    componentDidMount = () => {
+        // setstate cualquier cosa
+
+    }
 
     handleCustomerChange = nanme => event => {
 
