@@ -19,9 +19,29 @@ const styles = theme => ({
     title: {
       margin: '24px 16px 8px 0px',
       color: theme.palette.openTitle
+    },
+    subheading: {
+        color: 'rgba(88, 114, 128, 0.87)',
+        marginTop: "20px",
+    },
+    addressField: {
+        marginTop: "4px",
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: "45%"
+    },
+    streetField: {
+        marginTop: "4px",
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: "93%"
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: "90%"
     }
 })
-
 
 class Checkout extends Component {
     state = {
@@ -71,6 +91,11 @@ class Checkout extends Component {
             <TextField id="state" label="State" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.state} onChange={this.handleAddressChange('state')} margin="normal"/><br/>
             <TextField id="zipcode" label="Zip Code" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.zipcode} onChange={this.handleAddressChange('zipcode')} margin="normal"/>
             <TextField id="country" label="Country" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.country} onChange={this.handleAddressChange('country')} margin="normal"/>
+            <br/> {
+            this.state.error && (<Typography component="p" color="error">
+                <Icon color="error" className={classes.error}>error</Icon>
+                {this.state.error}</Typography>)
+            }
             <div>
             <Elements>
                 <PlaceOrder checkoutDetails={this.state.checkoutDetails} />
