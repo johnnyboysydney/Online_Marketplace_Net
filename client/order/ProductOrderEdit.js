@@ -60,15 +60,76 @@ class ProductOrderEdit extends Component {
         this.loadStatusValues()
     }
 
-    handleStatusChange = product => event => {
-
-    }
+    handleStatusChange = productIndex => event => {
+        let order = this.props.order
+        order.products[productIndex].status = event.target.value
+        let product = order.products[productIndex]
+        const jwt = auth.isAuthenticated()
+    
+        if(event.target.value == "Cancelled"){
+            cancelProduct({
+                shopId: this.props.shopId,
+                productId: product.product._id
+              },
+              {t: jwt.token},
+              { cartItemId: product._id,
+                status: event.target.value,
+                quantity: product.quantity
+              })
+              .then((data) => {
+                  if (data.error) {
+                    this.setState({error: "Status not updated, try again"})
+                  } else {
+                    this.props.updateOrders(this.props.orderIndex, order)
+                    this.setState({error: ''})
+                  }
+              })
+        }else if(event.target.value == "Processing"){
+            processCharge({
+                userId: jwt.user._id,
+                shopId: this.props.shopId,
+                orderId: order._id
+              },
+              {t: jwt.token},
+              { cartItemId: product._id,
+                status: event.target.value,
+                amount: (product.quantity * product.product.price)
+              })
+              .then((data) => {
+                  if (data.error) {
+                    this.setState({error: "Status not updated, try again"})
+                  } else {
+                    this.props.updateOrders(this.props.orderIndex, order)
+                    this.setState({error: ''})
+                  }
+              })
+        }
+        else{
+            update({
+              shopId: this.props.shopId
+            },
+            {t: jwt.token},
+            { cartItemId: product._id,
+              status: event.target.value
+            })
+            .then((data) => {
+              if (data.error) {
+                this.setState({error: "Status not updated, try again"})
+              } else {
+                this.props.updateOrders(this.props.orderIndex, order)
+                this.setState({error: ''})
+              }
+            })
+        }
+      }
 
     render() {
         const { classes } = this.props
         return (
             <div>
-
+                <Typography component="span" color="error" className={classes.statusMessage}>
+                    {this.state.error}
+                </Typography>
             </div>
         )
     }
