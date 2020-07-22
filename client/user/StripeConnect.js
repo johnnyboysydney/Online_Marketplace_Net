@@ -53,13 +53,27 @@ class StripeConnect extends Component {
       })
     }
   }
-  
+
   render() {
-      return (
-          <div>
-              
-          </div>
-      )
+    const {classes} = this.props
+    return (
+      <div>
+        <Paper className={classes.root} elevation={4}>
+          <Typography type="title" className={classes.title}>
+            Connect your Stripe Account
+          </Typography>
+          {this.state.error && (<Typography type="subheading" className={classes.subheading}>
+              Could not connect your Stripe account. Try again later.
+            </Typography>)}
+          {this.state.connecting && (<Typography type="subheading" className={classes.subheading}>
+              Connecting your Stripe account ...
+            </Typography>)}
+          {this.state.connected && (<Typography type="subheading" className={classes.subheading}>
+              Your Stripe account successfully connected!
+            </Typography>)}
+        </Paper>
+      </div>
+    )
   }
 }
 
