@@ -24,9 +24,8 @@ const styles = theme => ({
     marginLeft: "24px"
   }
 })
-
 class StripeConnect extends Component {
-  
+
   state = {
     error: false,
     connecting: false,
@@ -55,7 +54,6 @@ class StripeConnect extends Component {
       })
     }
   }
-
   render() {
     const {classes} = this.props
     return (
@@ -78,9 +76,8 @@ class StripeConnect extends Component {
     )
   }
 }
-
 StripeConnect.propTypes = {
-    classes: PropTypes.object.isRequired
-  }
-  
-  export default withStyles(styles)(StripeConnect)
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(StripeConnect)
