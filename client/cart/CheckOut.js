@@ -11,7 +11,15 @@ import PlaceOrder from './PlaceOrder'
 import {Elements} from 'react-stripe-elements'
 
 const styles = theme => ({ 
-
+    card: {
+        margin: '24px 0px',
+        padding: '16px 40px 90px 40px',
+        backgroundColor: '#80808017'
+    },
+    title: {
+      margin: '24px 16px 8px 0px',
+      color: theme.palette.openTitle
+    }
 })
 
 
