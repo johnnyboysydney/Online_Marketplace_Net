@@ -13,14 +13,18 @@ class DeleteUser extends Component {
     redirect: false,
     open: false
   }
+  
   clickButton = () => {
     this.setState({open: true})
   }
+
   deleteAccount = () => {
     const jwt = auth.isAuthenticated()
     remove({
       userId: this.props.userId
-    }, {t: jwt.token}).then((data) => {
+    }, 
+    {t: jwt.token})
+    .then((data) => {
       if (data.error) {
         console.log(data.error)
       } else {
@@ -41,7 +45,6 @@ class DeleteUser extends Component {
       <IconButton aria-label="Delete" onClick={this.clickButton} color="secondary">
         <DeleteIcon/>
       </IconButton>
-
       <Dialog open={this.state.open} onClose={this.handleRequestClose}>
         <DialogTitle>{"Delete Account"}</DialogTitle>
         <DialogContent>
@@ -61,7 +64,9 @@ class DeleteUser extends Component {
     </span>)
   }
 }
+
 DeleteUser.propTypes = {
   userId: PropTypes.string.isRequired
 }
+
 export default DeleteUser
