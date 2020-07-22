@@ -37,7 +37,7 @@ const styles = theme => ({
     marginRight: '10px'
   }
 })
-
+// users profile
 class Profile extends Component {
   constructor({match}) {
     super()
@@ -69,7 +69,7 @@ class Profile extends Component {
   componentDidMount = () => {
     this.init(this.match.params.userId)
   }
-  
+
   render() {
     const {classes} = this.props
     const redirectToSignin = this.state.redirectToSignin
