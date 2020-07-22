@@ -42,8 +42,63 @@ class Order extends Component {
 
   render() {
     const {classes} = this.props
-    return 
-      
+    return (
+      <Card className={classes.card}>
+        <Typography type="headline" component="h2" className={classes.title}>
+            Order Details
+        </Typography>
+        <Typography type="subheading" component="h2" className={classes.subheading}>
+            Order Code: <strong>{this.state.order._id}</strong> <br/> Placed on {(new Date(this.state.order.created)).toDateString()}
+        </Typography><br/>
+        <Grid container spacing={8}>
+            <Grid item xs={7} sm={7}>
+                <Card className={classes.innerCardItems}>
+                  {this.state.order.products.map((item, i) => {
+                    return  <span key={i}>
+                      <Card className={classes.cart} >
+                        <CardMedia
+                          className={classes.cover}
+                          image={'/api/product/image/'+item.product._id}
+                          title={item.product.name}
+                        />
+                        <div className={classes.details}>
+                          <CardContent className={classes.content}>
+                            <Link to={'/product/'+item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
+                            <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">$ {item.product.price} x {item.quantity}</Typography>
+                            <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
+                            <span className={classes.itemShop}>Shop: {item.shop.name}</span>
+                            <Typography type="subheading" component="h3" color={item.status == "Cancelled" ? "error":"secondary"}>Status: {item.status}</Typography>
+                          </CardContent>
+                        </div>
+                      </Card>
+                      <Divider/>
+                    </span>})
+                  }
+                  <div className={classes.checkout}>
+                    <span className={classes.total}>Total: ${this.getTotal()}</span>
+                  </div>
+                </Card>
+            </Grid>
+            <Grid item xs={5} sm={5}>
+              <Card className={classes.innerCard}>
+                <Typography type="subheading" component="h2" className={classes.productTitle} color="primary">
+                 Deliver to:
+                </Typography>
+                <Typography type="subheading" component="h3" className={classes.info} color="primary"><strong>{this.state.order.customer_name}</strong></Typography><br/>
+                <Typography type="subheading" component="h3" className={classes.info} color="primary">{this.state.order.customer_email}</Typography><br/>
+                <br/>
+                <Divider/>
+                <br/>
+                <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.street}</Typography>
+                <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.city}, {this.state.order.delivery_address.state} {this.state.order.delivery_address.zipcode}</Typography>
+                <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.country}</Typography><br/>
+                <Typography type="subheading" component="h3" className={classes.thanks} color="primary">Thank you for shopping with us! <br/>You can track the status of your purchased items on this page.</Typography>
+              </Card>
+            </Grid>
+        </Grid>
+      </Card>
+    )
+  }
 }
 
 Order.propTypes = {
