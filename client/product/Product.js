@@ -54,20 +54,32 @@ class Product extends Component {
             : '/api/product/defaultphoto'
         const {classes} = this.props
         return (
-            <div>
-                <Grid container spacing={40}>
-                    <Grid>
+            <div className={ classes.root } >
+                <Grid container spacing = {40} >
+                    <Grid className={classes.card} >
                         <Card>
                             <CardHeader
-                                title={}
-                                subheader={}
-                                action={}
+                                title={ this.state.product.name }
+                                subheader={ this.state.product.quantity > 0 ? 'In Stock' : 'Out of Stock' }
+                                action={
+                                    <span className = { classes.action } >
+                                        <AddToCart cartStyle = { classes.addCart } item = { this.state.product } />
+                                    </span>
+                                }
                             />
-                            <div>
-                                <CardMedia></CardMedia>
-                                <Typography>
-                                    <Link>
-                                        <Icon>shopping_basket</Icon>
+                            <div className = { classes.flex } >
+                                <CardMedia 
+                                className = { classes.media }
+                                image = { imageUrl }
+                                title = { this.state.product.name }
+                                 />
+                                <Typography component = "p" type = "subheading" className = { classes.subheading } >
+                                    { this.state.product.description }<br/>
+                                    <span className = { classes.price}>$ { this.state.product.price } </span>
+                                    <Link to = { '/shops/' + this.state.product.shop._id } className = { classes.link } >
+                                        <span>
+                                            <Icon className = { classes.icon } >shopping_basket</Icon> { this.state.product.shop.name }
+                                        </span>
                                     </Link>
                                 </Typography>
                             </div>                        
