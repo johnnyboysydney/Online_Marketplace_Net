@@ -6,7 +6,7 @@ import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {read} from './api-shop.js'
-import Products from '../product/products.js'
+import Products from '../product/Products.js'
 import {listByShop} from './../product/api-product.js'
 
 const styles = theme => ({})
@@ -22,11 +22,29 @@ class Shop extends Component {
     }
 
     loadProducts = () => {
-
+      listByShop({
+        shopId: this.match.params.shopId
+      }).then((data)=>{
+        if (data.error) {
+          this.setState({error: data.error})
+        } else {
+          this.setState({products: data})
+        }
+      })
     }
 
     componentDidMount = () => {
-
+      this.loadProducts()
+      read({
+        shopId: this.match.params.shopId
+      })
+      .then((data) => {
+        if (data.error) {
+          this.setState({error: data.error})
+        } else {
+          this.setState({shop: data})
+        }
+      })
     }
 
     render() {
