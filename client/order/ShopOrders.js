@@ -45,13 +45,38 @@ class ShopOrders extends Component {
     }
 
     render() {
-        const { classes } = this.props
+        const {classes} = this.props
         return (
-            <div>
-                
-            </div>
-        )
-    }
+        <div>
+          <Paper className={classes.root} elevation={4}>
+            <Typography type="title" className={classes.title}>
+              Orders in {this.match.params.shop}
+            </Typography>
+            <List dense >
+              {this.state.orders.map((order, index) => {
+                return   <span key={index}>
+                  <ListItem button onClick={this.handleClick(index)}>
+                    <ListItemText primary={'Order # '+order._id} secondary={(new Date(order.created)).toDateString()}/>
+                    {this.state.open == index ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem><Divider/>
+                  <Collapse component="li" in={this.state.open == index} timeout="auto" unmountOnExit>
+                    <ProductOrderEdit shopId={this.match.params.shopId} order={order} orderIndex={index} updateOrders={this.updateOrders}/>
+                    <div className={classes.customerDetails}>
+                      <Typography type="subheading" component="h3" className={classes.subheading}>
+                        Deliver to:
+                      </Typography>
+                      <Typography type="subheading" component="h3" color="primary"><strong>{order.customer_name}</strong> ({order.customer_email})</Typography>
+                      <Typography type="subheading" component="h3" color="primary">{order.delivery_address.street}</Typography>
+                      <Typography type="subheading" component="h3" color="primary">{order.delivery_address.city}, {order.delivery_address.state} {order.delivery_address.zipcode}</Typography>
+                      <Typography type="subheading" component="h3" color="primary">{order.delivery_address.country}</Typography><br/>
+                    </div>
+                  </Collapse>
+                  <Divider/>
+                </span>})}
+            </List>
+          </Paper>
+        </div>)
+      }
 
 }
 
