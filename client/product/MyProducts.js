@@ -7,7 +7,32 @@ import Typography from 'material-ui/styles/typography'
 import { Edit, Delete } from 'material-ui-icons'
 
 const styles = theme => ({
-
+  products: {
+    padding: '24px'
+  },
+  addButton:{
+    float:'right'
+  },
+  leftIcon: {
+    marginRight: "8px"
+  },
+  title: {
+    margin: theme.spacing.unit * 2,
+    color: theme.palette.protectedTitle,
+    fontSize: '1.2em'
+  },
+  subheading: {
+    marginTop: theme.spacing.unit * 2,
+    color: theme.palette.openTitle
+  },
+  cover: {
+    width: 110,
+    height: 100,
+    margin: '8px'
+  },
+  details: {
+    padding: '10px'
+  },
 })
 class MyProducts extends Component {
   state = {
@@ -51,8 +76,8 @@ class MyProducts extends Component {
             </Link>
           </span>
         </Typography>
-        <List>
-          {this.state.products.map((product) => {
+        <List dense>
+          {this.state.products.map((product, i) => {
             return <span key = {i}>
               <ListItem>
                   <CardMedia
@@ -60,17 +85,17 @@ class MyProducts extends Component {
                     image = { '/api/product/image' + product._id + "?" + new Date().getTime() }
                     title = { product.name }
                   />
-                  <div>
-                    <Typography>
+                  <div className={classes.details} >
+                    <Typography type="headline" component="h2" color="primary" className={classes.productTitle} >
                       { product.name }
                     </Typography>
-                    <Typography>
+                    <Typography type="subheading" component="h4" className={classes.subheading} >
                       Quantity: { product.quantity } | Price: $ {product.price}
                     </Typography>
                   </div>
                   <ListItemSecondaryAction>
-                      <Link>
-                        <IconButton>
+                      <Link to={"/seller/"+product.shop._id+"/"+product._id+"/edit"} >
+                        <IconButton aria-label="Edit" color="primary" >
                           <Edit />
                         </IconButton>
                       </Link>
