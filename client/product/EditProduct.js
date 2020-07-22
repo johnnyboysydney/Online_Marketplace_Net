@@ -3,6 +3,14 @@ import auth from './../auth/auth-helper'
 import Card, {CardActions, CardContent} from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import FileUpload from 'material-ui-icons/FileUpload'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import Icon from 'material-ui/Icon'
+import Avatar from 'material-ui/Avatar'
+import PropTypes from 'prop-types'
+import {withStyles} from 'material-ui/styles'
+import {read, update} from './api-product.js'
+import {Link, Redirect} from 'react-router-dom'
 
 const styles = theme => ({})
 
