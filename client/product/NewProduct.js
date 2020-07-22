@@ -74,10 +74,23 @@ class NewProduct extends Component {
           </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
           <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
           <TextField
+            id="multiline-flexible"
+            label="Description"
+            multiline
+            rows="2"
+            value={this.state.description}
+            onChange={this.handleChange('description')}
+            className={classes.textField}
+            margin="normal"
           /><br/>
           <TextField id="category" label="Category" className={classes.textField} value={this.state.category} onChange={this.handleChange('category')} margin="normal"/><br/>
           <TextField id="quantity" label="Quantity" className={classes.textField} value={this.state.quantity} onChange={this.handleChange('quantity')} type="number" margin="normal"/><br/>
           <TextField id="price" label="Price" className={classes.textField} value={this.state.price} onChange={this.handleChange('price')} type="number" margin="normal"/><br/>
+          {
+            this.state.error && (<Typography component="p" color="error">
+              <Icon color="error" className={classes.error}>error</Icon>
+              {this.state.error}</Typography>)
+          }
         </CardContent>
         <CardActions>
           <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
