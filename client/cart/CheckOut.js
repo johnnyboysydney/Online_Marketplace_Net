@@ -26,16 +26,24 @@ class Checkout extends Component {
     }
 
     componentDidMount = () => {
-        // setstate cualquier cosa
-
+        let user = auth.isAuthenticated().user
+        let checkoutDetails = this.state.checkoutDetails
+        checkoutDetails.products = cart.getCart()
+        checkoutDetails.customer_name = user.name
+        checkoutDetails.customer_email = user.email
+        this.setState({checkoutDetails: checkoutDetails})
     }
 
     handleCustomerChange = nanme => event => {
-
+        let checkoutDetails = this.state.checkoutDetails
+        checkoutDetails[name] = event.target.value || undefined
+        this.setState({checkoutDetails: checkoutDetails})
     }
 
     handleAddressChange = name => event => {
-
+        let checkoutDetails = this.state.checkoutDetails
+        checkoutDetails.delivery_address[name] = event.target.value || undefined
+        this.setState({checkoutDetails: checkoutDetails})
     }
 
     render() {
