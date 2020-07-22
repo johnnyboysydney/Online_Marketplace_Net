@@ -7,6 +7,17 @@ import DisabledCartIcon from 'material-ui-icons/RemoveShoppingCart'
 import cart from './cart-helper.js'
 import { Redirect } from 'react-router-dom'
 
+const styles = theme => ({
+    iconButton: {
+      width: '28px',
+      height: '28px'
+    },
+    disabledIconButton: {
+      color: '#7f7563',
+      width: '28px',
+      height: '28px'
+    }
+  })
 class AddToCart extends Component {
     state = {
         redirect: false
