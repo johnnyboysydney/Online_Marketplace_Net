@@ -47,7 +47,13 @@ class ProductOrderEdit extends Component {
     }
 
     loadStatusValues = () => {
-
+        getStatusValues().then((data) => {
+            if (data.error) {
+              this.setState({error: "Could not get status"})
+            } else {
+              this.setState({statusValues: data, error: ''})
+            }
+        })
     }
 
     componentDidMount = () => {
