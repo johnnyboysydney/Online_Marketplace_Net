@@ -12,7 +12,9 @@ class MyProducts extends Component {
   }
 
   loadProducts = () => {
-
+    listByShop({
+      shopId: this.props.shopId
+    })
   }
 
   componentDidMount = () => {
@@ -20,7 +22,10 @@ class MyProducts extends Component {
   }
 
   removeProduct = (product) => {
-
+    const updatedProducts = this.state.products
+    const index = updatedProducts.indexOf(product)
+    updatedProducts.splice(index, 1)
+    this.setState({shops: updatedProducts})
   }
 
   render() {
