@@ -9,7 +9,90 @@ import {read} from './api-order.js'
 import {Link} from 'react-router-dom'
 
 const styles = theme => ({
-
+  card: {
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit * 2,
+    flexGrow: 1,
+    margin: 30,
+  },
+  cart: {
+    textAlign: 'left',
+    width: '100%',
+    display: 'inline-flex'
+  },
+  details: {
+    display: 'inline-block',
+    width: "100%",
+    padding: "4px"
+  },
+  content: {
+    flex: '1 0 auto',
+    padding: '16px 8px 0px'
+  },
+  cover: {
+    width: 160,
+    height: 125,
+    margin: '8px'
+  },
+  info: {
+    color: 'rgba(83, 170, 146, 0.82)',
+    fontSize: '0.95rem',
+    display: 'inline'
+  },
+  thanks:{
+    color: 'rgb(136, 183, 107)',
+    fontSize: '0.9rem',
+    fontStyle: 'italic'
+  },
+  innerCardItems: {
+    textAlign: 'left',
+    margin: '24px 10px 24px 24px',
+    padding: '24px 20px 40px 20px',
+    backgroundColor: '#80808017'
+  },
+  innerCard: {
+    textAlign: 'left',
+    margin: '24px 24px 24px 10px',
+    padding: '30px 45px 40px 45px',
+    backgroundColor: '#80808017'
+  },
+  title: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit,
+    color: theme.palette.protectedTitle,
+    fontSize: '1.2em'
+  },
+  subheading: {
+    marginTop: theme.spacing.unit,
+    color: theme.palette.openTitle
+  },
+  productTitle: {
+    fontSize: '1.15em',
+    marginBottom: '5px'
+  },
+  itemTotal: {
+    float: 'right',
+    marginRight: '40px',
+    fontSize: '1.5em',
+    color: 'rgb(72, 175, 148)'
+  },
+  itemShop: {
+    display: 'block',
+    fontSize: '1em',
+    color: '#78948f'
+  },
+  checkout: {
+    float: 'right',
+    margin: '24px'
+  },
+  total: {
+    fontSize: '1.2em',
+    color: 'rgb(53, 97, 85)',
+    marginRight: '16px',
+    fontWeight: '600',
+    verticalAlign: 'bottom'
+  }
 })
 
 class Order extends Component {
