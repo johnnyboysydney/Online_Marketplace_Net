@@ -30,9 +30,37 @@ const listByShop = () => {
   })
 }
 
-const update = () => {}
+const update = (params, credentials, product) => {
+  return fetch('/api/order/status/' + params.shopId, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(product)
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
 
-const cancelProduct = () => {}
+const cancelProduct = (params, credentials, product) => {
+  return fetch('/api/order/'+params.shopId+'/cancel/'+params.productId, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(product)
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
 
 const processCharge = () => {}
 
