@@ -12,7 +12,44 @@ import {withStyles} from 'material-ui/styles'
 import {read, update} from './api-product.js'
 import {Link, Redirect} from 'react-router-dom'
 
-const styles = theme => ({})
+const styles = theme => ({
+  card: {
+    margin: 'auto',
+    textAlign: 'center',
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 2,
+    maxWidth: 500,
+    paddingBottom: theme.spacing.unit * 2
+  },
+  title: {
+    margin: theme.spacing.unit * 2,
+    color: theme.palette.protectedTitle,
+    fontSize: '1.2em'
+  },
+  error: {
+    verticalAlign: 'middle'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 400
+  },
+  submit: {
+    margin: 'auto',
+    marginBottom: theme.spacing.unit * 2
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60,
+    margin: 'auto'
+  },
+  input: {
+    display: 'none'
+  },
+  filename:{
+    marginLeft:'10px'
+  }
+})
 
 class EditProduct extends Component {
   constructor({match}) {
