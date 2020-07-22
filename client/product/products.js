@@ -4,7 +4,7 @@ import {withStyles} from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList'
 import {Link} from 'react-router-dom'
-import AddToCart from './../cart/AddToCart'
+import AddToCart from '../cart/AddToCart'
 
 const styles = theme => ({
 
