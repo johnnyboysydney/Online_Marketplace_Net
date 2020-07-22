@@ -20,23 +20,36 @@ class CartItems extends Component {
     }
 
     componentDidMount = () => {
-
+        this.setState({cartItems: cart.getCart()})
     }
 
     handleChange = index => event => {
-
+        let cartItems = this.state.cartItems
+        if(event.target.value == 0){
+          cartItems[index].quantity = 1
+        }else{
+          cartItems[index].quantity = event.target.value
+        }
+        this.setState({cartItems: cartItems})
+        cart.updateCart(index, event.target.value)
     }
 
     getTotal() {
-
+        return this.state.cartItems.reduce((a, b) => {
+            return a + (b.quantity*b.product.price)
+        }, 0)
     }
 
     removeItem = index => event => {
-
+        let cartItems = cart.removeItem(index)
+        if(cartItems.length == 0){
+          this.props.setCheckout(false)
+        }
+        this.setState({cartItems: cartItems})
     }
 
     openCheckout = () => {
-
+        this.props.setCheckout(true)
     }
 
     render() {
