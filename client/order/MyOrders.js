@@ -6,7 +6,18 @@ import List, {ListItem, ListItemText} from 'material-ui/List'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 
-const styles = theme => ({})
+const styles = theme => ({
+    root: theme.mixins.gutters({
+      maxWidth: 600,
+      margin: '12px 24px',
+      padding: theme.spacing.unit * 3,
+      backgroundColor: '#3f3f3f0d'
+    }),
+    title: {
+      margin: `${theme.spacing.unit * 2}px 0 12px ${theme.spacing.unit}px` ,
+      color: theme.palette.openTitle
+    }
+  })
 class MyOrders extends Component {
     state = {
         orders:[]
