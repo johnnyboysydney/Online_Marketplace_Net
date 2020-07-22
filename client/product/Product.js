@@ -10,7 +10,15 @@ import {Link} from 'react-router-dom'
 import Suggestions from './../product/Suggestions'
 import AddToCart from './../cart/AddToCart'
 
-const styles = theme => ({})
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        margin: 30,
+    },
+    flex:{
+      display:'flex'
+    }
+})
 
 class Product extends Component {
     constructor({match}) {
