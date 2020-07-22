@@ -2,11 +2,13 @@ import React, {Component} from 'react'
 import Card, {CardActions, CardContent} from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import FileUpload from 'material-ui-icons/FileUpload'
+import auth from './../auth/auth-helper'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
+import {create} from './api-product.js'
 import {Link, Redirect} from 'react-router-dom'
 
 const styles = theme => ({
