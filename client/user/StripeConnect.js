@@ -32,8 +32,28 @@ class StripeConnect extends Component {
     connected: false
   }
   componentDidMount = () => {
-
+    const parsed = queryString.parse(this.props.location.search)
+    if(parsed.error){
+      this.setState({error: true})
+    }
+    if(parsed.code){
+      this.setState({connecting: true, error: false})
+      //post call to stripe, get credentials and update user data
+      const jwt = auth.isAuthenticated()
+      stripeUpdate({
+        userId: jwt.user._id
+      }, {
+        t: jwt.token
+      }, parsed.code).then((data) => {
+        if (data.error) {
+          this.setState({error: true, connected: false, connecting: false})
+        } else {
+          this.setState({connected: true, connecting: false, error: false})
+        }
+      })
+    }
   }
+  
   render() {
       return (
           <div>
