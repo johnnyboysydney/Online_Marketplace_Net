@@ -44,7 +44,6 @@ const styles = theme => ({
 
 class EditProfile extends Component {
   constructor({match}) {
-    // super() is used to access and call functions on an object's parent
     super()
     this.state = {
       name: '',
@@ -61,9 +60,7 @@ class EditProfile extends Component {
     const jwt = auth.isAuthenticated()
     read({
       userId: this.match.params.userId
-    }, 
-    {t: jwt.token})
-    .then((data) => {
+    }, {t: jwt.token}).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -71,7 +68,6 @@ class EditProfile extends Component {
       }
     })
   }
-  
   clickSubmit = () => {
     const jwt = auth.isAuthenticated()
     const user = {
@@ -84,8 +80,7 @@ class EditProfile extends Component {
       userId: this.match.params.userId
     }, {
       t: jwt.token
-    }, user)
-    .then((data) => {
+    }, user).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -95,15 +90,12 @@ class EditProfile extends Component {
       }
     })
   }
-
   handleChange = name => event => {
     this.setState({[name]: event.target.value})
   }
-
   handleCheck = (event, checked) => {
     this.setState({'seller': checked})
   }
-
   render() {
     const {classes} = this.props
     if (this.state.redirectToProfile) {
