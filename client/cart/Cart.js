@@ -20,12 +20,18 @@ class Cart extends Component {
     }
     
     componentDidMount = () => {
-     
-
+      if (window.Stripe) {
+        this.setState({stripe: window.Stripe(config.stripe_test_api_key)})
+      } else {
+        document.querySelector('#stripe-js').addEventListener('load', () => {
+          // Create Stripe instance once Stripe.js loads
+          this.setState({stripe: window.Stripe(config.stripe_test_api_key)})
+        })
+      }
     }
 
     setCheckout = val => {
-
+      this.setState({ checkout: val })
     }
 
     render() {
