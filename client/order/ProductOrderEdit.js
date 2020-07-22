@@ -6,6 +6,8 @@ import Typography from 'material-ui/Typography'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
 import Divider from 'material-ui/Divider'
+import auth from './../auth/auth-helper'
+import {getStatusValues, update, cancelProduct, processCharge} from './api-order.js'
 
 const styles = theme => ({
     nested: {
