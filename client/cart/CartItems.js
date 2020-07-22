@@ -11,7 +11,82 @@ import cart from './cart-helper.js'
 import {Link} from 'react-router-dom'
 
 const styles = theme => ({
-
+    card: {
+        margin: '24px 0px',
+        padding: '16px 40px 60px 40px',
+        backgroundColor: '#80808017'
+    },
+    title: {
+        margin: theme.spacing.unit * 2,
+        color: theme.palette.openTitle,
+        fontSize: '1.2em'
+    },
+    price: {
+        color: theme.palette.text.secondary,
+        display: 'inline'
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        marginTop: 0,
+        width: 50
+    },
+    productTitle: {
+        fontSize: '1.15em',
+        marginBottom: '5px'
+    },
+    subheading: {
+        color: 'rgba(88, 114, 128, 0.67)',
+        padding: '8px 10px 0',
+        cursor: 'pointer',
+        display: 'inline-block'
+    },
+    cart: {
+        width: '100%',
+        display: 'inline-flex'
+    },
+    details: {
+        display: 'inline-block',
+        width: "100%",
+        padding: "4px"
+    },
+    content: {
+        flex: '1 0 auto',
+        padding: '16px 8px 0px'
+    },
+    cover: {
+        width: 160,
+        height: 125,
+        margin: '8px'
+    },
+    itemTotal: {
+        float: 'right',
+        marginRight: '40px',
+        fontSize: '1.5em',
+        color: 'rgb(72, 175, 148)'
+    },
+    checkout: {
+        float: 'right',
+        margin: '24px'
+    },
+    total: {
+        fontSize: '1.2em',
+        color: 'rgb(53, 97, 85)',
+        marginRight: '16px',
+        fontWeight: '600',
+        verticalAlign: 'bottom'
+    },
+    continueBtn: {
+        marginLeft: '10px'
+    },
+    itemShop: {
+        display: 'block',
+        fontSize: '0.90em',
+        color: '#78948f'
+    },
+    removeButton: {
+        fontSize: '0.8em'
+    }
 })
 
 class CartItems extends Component {
