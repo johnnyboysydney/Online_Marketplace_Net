@@ -7,8 +7,12 @@ import {StripeProvider} from 'react-stripe-elements'
 import config from './../../config/config'
 import Checkout from './Checkout'
 
-
-
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    margin: 30,
+  }
+})
 class Cart extends Component {
     state = {
       checkout: false,
@@ -25,10 +29,23 @@ class Cart extends Component {
     }
 
     render() {
-        return
-        <div>
-
-        </div>
+      const {classes} = this.props
+      return (
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={6} sm={6}>
+            <CartItems checkout={this.state.checkout}
+                       setCheckout={this.setCheckout}/>
+          </Grid>
+          {this.state.checkout &&
+          <Grid item xs={6} sm={6}>
+            <StripeProvider stripe={this.state.stripe}>
+              <Checkout/>
+            </StripeProvider>
+          </Grid>}
+        </Grid>
+      </div>
+      )
     }
 }
 
