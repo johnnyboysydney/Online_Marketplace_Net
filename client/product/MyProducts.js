@@ -14,6 +14,12 @@ class MyProducts extends Component {
   loadProducts = () => {
     listByShop({
       shopId: this.props.shopId
+    }).then((data)=>{
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({products: data})
+      }
     })
   }
 
