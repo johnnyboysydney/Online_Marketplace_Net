@@ -41,6 +41,7 @@ const styles = theme => ({
     padding: '10px'
   },
 })
+
 class MyProducts extends Component {
   state = {
     products: []
@@ -119,6 +120,7 @@ class MyProducts extends Component {
       </Card>)
   }
 }
+
 MyProducts.propTypes = {
   classes: PropTypes.object.isRequired,
   shopId: PropTypes.string.isRequired
