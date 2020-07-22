@@ -38,7 +38,16 @@ class MyProducts extends Component {
     const {classes} = this.props
     return (
       <Card>
-
+        <Typography type="title" className={classes.title}>
+          Products
+          <span className={classes.addButton}>
+            <Link to={"/seller/"+this.props.shopId+"/products/new"}>
+              <Button color="primary" variant="raised">
+                <Icon className={classes.leftIcon}>add_box</Icon>  New Product
+              </Button>
+            </Link>
+          </span>
+        </Typography>
       </Card>)
   }
 }
