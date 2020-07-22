@@ -85,6 +85,10 @@ class Product extends Component {
                             </div>                        
                         </Card>
                     </Grid>
+                    { this.state.suggestions.length > 0 && 
+                       (<Grid item xs = {5} sm = {5} >
+                           <Suggestions products = { this.state. suggestions } title = 'Related Products' />
+                       </Grid>)}
                 </Grid>
             </div>
         )
