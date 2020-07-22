@@ -8,7 +8,21 @@ import {stripeUpdate} from './api-user.js'
 import auth from './../auth/auth-helper'
 
 const styles = theme => ({
-
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 5
+  }),
+  title: {
+    margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px`,
+    color: theme.palette.protectedTitle,
+    fontSize: '1.1em'
+  },
+  subheading: {
+    color: theme.palette.openTitle,
+    marginLeft: "24px"
+  }
 })
 
 class StripeConnect extends Component {
