@@ -14,7 +14,21 @@ const create = () => {
   .catch((err) => console.log(err))
 }
 
-const listByShop = () => {}
+const listByShop = () => {
+  return fetch('/api/orders/shop/'+params.shopId, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    }
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
 
 const update = () => {}
 
