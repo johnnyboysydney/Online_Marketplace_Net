@@ -69,14 +69,39 @@ class EditProduct extends Component {
 
   componentDidMount = () => {
     this.productData = new FormData()
-
+    read({
+      productId: this.match.params.productId
+    }).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({id: data._id, name: data.name, description: data.description, category: data.category, quantity:data.quantity, price: data.price})
+      }
+    })
   }
+  
   clickSubmit = () => {
     const jwt = auth.isAuthenticated()
-
+    update({
+      shopId: this.match.params.shopId,
+      productId: this.match.params.productId
+    }, {
+      t: jwt.token
+    }, this.productData).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({'redirect': true})
+      }
+    })
   }
-  handleChange = name => event => {
 
+  handleChange = name => event => {
+    const value = name === 'image'
+      ? event.target.files[0]
+      : event.target.value
+    this.productData.set(name, value)
+    this.setState({ [name]: value })
   }
 
   render() {
