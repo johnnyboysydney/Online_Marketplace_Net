@@ -26,11 +26,13 @@ const styles = theme => ({
 })
 
 class StripeConnect extends Component {
+  
   state = {
     error: false,
     connecting: false,
     connected: false
   }
+
   componentDidMount = () => {
     const parsed = queryString.parse(this.props.location.search)
     if(parsed.error){
