@@ -22,8 +22,15 @@ const cart = {
           cb()
         }
     },
-    updateCart(){
-        
+    updateCart(itemIndex, quantity){
+        let cart = []
+        if (typeof window !== "undefined") {
+          if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'))
+          }
+          cart[itemIndex].quantity = quantity
+          localStorage.setItem('cart', JSON.stringify(cart))
+        }
     },
     getCart(){
 
