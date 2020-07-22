@@ -62,13 +62,51 @@ const cancelProduct = (params, credentials, product) => {
   })
 }
 
-const processCharge = () => {}
+const processCharge = (params, credentials, product) => {
+  return fetch('/api/order/'+params.orderId+'/charge/'+params.userId+'/'+params.shopId, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(product)
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
 
-const getStatusValues = () => {}
+const getStatusValues = () => {
+  return fetch('/api/order/status_values', {
+    method: 'GET'
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => console.log(err))
+}
 
-const listByUser = () => {}
+const listByUser = (params, credentials) => {
+  return fetch('/api/orders/user/'+params.userId, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    }
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
 
-const read = () => {}
+const read = (params, credentials) => {
+  return fetch('/api/order/' + params.orderId, {
+    method: 'GET'
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => console.log(err))
+}
 
 export {
     create,
