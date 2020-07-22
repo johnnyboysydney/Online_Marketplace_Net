@@ -51,7 +51,9 @@ class Profile extends Component {
     const jwt = auth.isAuthenticated()
     read({
       userId: userId
-    }, {t: jwt.token}).then((data) => {
+    }, 
+    {t: jwt.token})
+    .then((data) => {
       if (data.error) {
         this.setState({redirectToSignin: true})
       } else {
@@ -59,12 +61,15 @@ class Profile extends Component {
       }
     })
   }
+
   componentWillReceiveProps = (props) => {
     this.init(props.match.params.userId)
   }
+
   componentDidMount = () => {
     this.init(this.match.params.userId)
   }
+  
   render() {
     const {classes} = this.props
     const redirectToSignin = this.state.redirectToSignin
