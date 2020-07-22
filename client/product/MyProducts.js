@@ -1,10 +1,17 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
+import Button from 'material-ui/Button'
 import Card, {CardMedia} from 'material-ui/Card'
-import { ListItem, Divider, IconButton } from 'material-ui'
-import Typography from 'material-ui/styles/typography'
-import { Edit, Delete } from 'material-ui-icons'
+import IconButton from 'material-ui/IconButton'
+import Edit from 'material-ui-icons/Edit'
+import Icon from 'material-ui/Icon'
+import List, {ListItem, ListItemSecondaryAction} from 'material-ui/List'
+import Typography from 'material-ui/Typography'
+import {Link} from 'react-router-dom'
+import Divider from 'material-ui/Divider'
+import {listByShop} from './../product/api-product.js'
+import DeleteProduct from './../product/DeleteProduct'
 
 const styles = theme => ({
   products: {
