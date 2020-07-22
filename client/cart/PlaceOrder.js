@@ -111,3 +111,4 @@ PlaceOrder.propTypes = {
   }
   
   export default injectStripe(withStyles(styles)(PlaceOrder))
+  
