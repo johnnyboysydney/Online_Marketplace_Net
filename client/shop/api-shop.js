@@ -58,7 +58,18 @@ const update = (params, credentials, shop) => {
 }
 
 const remove = (params, credentials) => {
-
+  return fetch('/api/shops/' + params.shopId, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    }
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
 }
 
 export {
