@@ -109,8 +109,15 @@ const listByShop = (req, res) => {
   }).populate('shop', '_id name').select('-image')
 }
 
-const listLatest = () => {
-
+const listLatest = (req, res) => {
+  Product.find({}).sort('-created').limit(5).populate('shop', '_id name').exec((err, products) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(products)
+  })
 }
 
 const listRelated = () => {
