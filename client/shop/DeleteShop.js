@@ -33,7 +33,26 @@ class DeleteShop extends Component {
   }
   render() {
     return (<span>
+      <IconButton aria-label="Delete" onClick={this.clickButton} color="secondary">
+        <DeleteIcon/>
+      </IconButton>
 
+      <Dialog open={this.state.open} onClose={this.handleRequestClose}>
+        <DialogTitle>{"Delete "+this.props.shop.name}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Confirm to delete your shop {this.props.shop.name}.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleRequestClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.deleteShop} color="secondary" autoFocus="autoFocus">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </span>)
   }
 }
