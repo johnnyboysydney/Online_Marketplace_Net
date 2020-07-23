@@ -32,11 +32,8 @@ router.route('/api/order/:orderId')
   .get(orderCtrl.read)
 
 router.param('userId', userCtrl.userByID)
-
 router.param('shopId', shopCtrl.shopByID)
-
 router.param('productId', productCtrl.productByID)
-
 router.param('orderId', orderCtrl.orderByID)
 
 export default router
