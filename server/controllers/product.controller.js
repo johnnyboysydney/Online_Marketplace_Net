@@ -146,12 +146,36 @@ const list = () => {
 
 }
 
-const decreaseQuantity = () => {
-
+const decreaseQuantity = (req, res, next) => {
+  let bulkOps = req.body.order.products.map((item) => {
+    return {
+        "updateOne": {
+            "filter": { "_id": item.product._id } ,
+            "update": { "$inc": {"quantity": -item.quantity} }
+        }
+    }
+   })
+   Product.bulkWrite(bulkOps, {}, (err, products) => {
+     if(err){
+       return res.status(400).json({
+         error: "Could not update product"
+       })
+     }
+     next()
+   })
 }
 
-const increaseQuantity = () => {
 
+const increaseQuantity = (req, res, next) => {
+  Product.findByIdAndUpdate(req.product._id, {$inc: {"quantity": req.body.quantity}}, {new: true})
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      next()
+    })
 }
 
 export default {
