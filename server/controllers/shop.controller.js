@@ -6,29 +6,29 @@ import fs from 'fs'
 import profileImage from './../../client/assets/images/profile-pic.png'
 
 const create = (req, res, next) => {
-    let form = new formidable.IncomingForm()
-    form.keepExtensions = true
-    form.parse(req, (err, fields, files) => {
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      res.status(400).json({
+        message: "Image could not be uploaded"
+      })
+    }
+    let shop = new Shop(fields)
+    shop.owner= req.profile
+    if(files.image){
+      shop.image.data = fs.readFileSync(files.image.path)
+      shop.image.contentType = files.image.type
+    }
+    shop.save((err, result) => {
       if (err) {
-        res.status(400).json({
-          message: "Image could not be uploaded"
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
         })
       }
-      let shop = new Shop(fields)
-      shop.owner= req.profile
-      if(files.image){
-        shop.image.data = fs.readFileSync(files.image.path)
-        shop.image.contentType = files.image.type
-      }
-      shop.save((err, result) => {
-        if (err) {
-          return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-          })
-        }
-        res.status(200).json(result)
-      })
+      res.status(200).json(result)
     })
+  })
 }
 
 const shopByID = (req, res, next, id) => {
@@ -49,9 +49,30 @@ const photo = (req, res, next) => {
   }
   next()
 }
-
 const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage)
+}
+
+const list = (req, res) => {
+  Shop.find((err, shops) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(shops)
+  })
+}
+
+const listByOwner = (req, res) => {
+  Shop.find({owner: req.profile._id}, (err, shops) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(shops)
+  }).populate('owner', '_id name')
 }
 
 const read = (req, res) => {
@@ -85,6 +106,16 @@ const update = (req, res, next) => {
   })
 }
 
+const isOwner = (req, res, next) => {
+  const isOwner = req.shop && req.auth && req.shop.owner._id == req.auth._id
+  if(!isOwner){
+    return res.status('403').json({
+      error: "User is not authorized"
+    })
+  }
+  next()
+}
+
 const remove = (req, res, next) => {
   let shop = req.shop
   shop.remove((err, deletedShop) => {
@@ -97,48 +128,15 @@ const remove = (req, res, next) => {
   })
 }
 
-const listByOwner = (req, res) => {
-  Shop.find({owner: req.profile._id}, (err, shops) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(shops)
-  }).populate('owner', '_id name')
-}
-
-const isOwner = (req, res, next) => {
-  const isOwner = req.shop && req.auth && req.shop.owner._id == req.auth._id
-  if(!isOwner){
-    return res.status('403').json({
-      error: "User is not authorized"
-    })
-  }
-  next()
-}
-
-const list = (req, res) => {
-  Shop.find((err, shops) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(shops)
-  })
-}
-
 export default {
-    create,
-    shopByID,
-    photo,
-    defaultPhoto,
-    list,
-    listByOwner,
-    read,
-    update,
-    isOwner,
-    remove
+  create,
+  shopByID,
+  photo,
+  defaultPhoto,
+  list,
+  listByOwner,
+  read,
+  update,
+  isOwner,
+  remove
 }
-  

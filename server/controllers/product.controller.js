@@ -6,29 +6,29 @@ import fs from 'fs'
 import profileImage from './../../client/assets/images/profile-pic.png'
 
 const create = (req, res, next) => {
-    let form = new formidable.IncomingForm()
-    form.keepExtensions = true
-    form.parse(req, (err, fields, files) => {
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res.status(400).json({
+        message: "Image could not be uploaded"
+      })
+    }
+    let product = new Product(fields)
+    product.shop= req.shop
+    if(files.image){
+      product.image.data = fs.readFileSync(files.image.path)
+      product.image.contentType = files.image.type
+    }
+    product.save((err, result) => {
       if (err) {
         return res.status(400).json({
-          message: "Image could not be uploaded"
+          error: errorHandler.getErrorMessage(err)
         })
       }
-      let product = new Product(fields)
-      product.shop= req.shop
-      if(files.image){
-        product.image.data = fs.readFileSync(files.image.path)
-        product.image.contentType = files.image.type
-      }
-      product.save((err, result) => {
-        if (err) {
-          return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-          })
-        }
-        res.json(result)
-      })
+      res.json(result)
     })
+  })
 }
 
 const productByID = (req, res, next, id) => {
@@ -49,14 +49,13 @@ const photo = (req, res, next) => {
   }
   next()
 }
-
 const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage)
 }
 
 const read = (req, res) => {
-    req.product.image = undefined
-    return res.json(req.product)
+  req.product.image = undefined
+  return res.json(req.product)
 }
 
 const update = (req, res, next) => {
@@ -177,7 +176,6 @@ const decreaseQuantity = (req, res, next) => {
    })
 }
 
-
 const increaseQuantity = (req, res, next) => {
   Product.findByIdAndUpdate(req.product._id, {$inc: {"quantity": req.body.quantity}}, {new: true})
     .exec((err, result) => {
@@ -191,18 +189,18 @@ const increaseQuantity = (req, res, next) => {
 }
 
 export default {
-    create,
-    productByID,
-    photo,
-    defaultPhoto,
-    read,
-    update,
-    remove,
-    listByShop,
-    listLatest,
-    listRelated,
-    listCategories,
-    list,
-    decreaseQuantity,
-    increaseQuantity
+  create,
+  productByID,
+  photo,
+  defaultPhoto,
+  read,
+  update,
+  remove,
+  listByShop,
+  listLatest,
+  listRelated,
+  listCategories,
+  list,
+  decreaseQuantity,
+  increaseQuantity
 }
