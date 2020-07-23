@@ -54,12 +54,35 @@ const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage)
 }
 
-const read = () => {
-
+const read = (req, res) => {
+  return res.json(req.shop)
 }
 
-const update = () => {
-
+const update = (req, res, next) => {
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      res.status(400).json({
+        message: "Photo could not be uploaded"
+      })
+    }
+    let shop = req.shop
+    shop = _.extend(shop, fields)
+    shop.updated = Date.now()
+    if(files.image){
+      shop.image.data = fs.readFileSync(files.image.path)
+      shop.image.contentType = files.image.type
+    }
+    shop.save((err) => {
+      if (err) {
+        return res.status(400).send({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(shop)
+    })
+  })
 }
 
 const remove = (req, res, next) => {
