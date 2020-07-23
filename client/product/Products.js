@@ -47,34 +47,36 @@ const styles = theme => ({
     display:'block'
   }
 })
-
 class Products extends Component {
-    render() {
-        const {classes} = this.props
-        return (
-            <div className={classes.root}>
-                {this.props.products.length > 0 ?
-                    (<div className={classes.container}>
-                        <GridList cellHeight={200} className={classes.gridList} cols={3}>
-                            {this.props.products.map((product, i) => (
-                                <GridListTile key = { i } className = { classes.tile }>
-                                    <Link to = { "/product/" + product._id }><img className = { classes.image } src = { '/api/product/image' + product._id } alt = { product.name } /></Link>
-                                        <GridListTileBar className = { classes.tileBar }
-                                            title = {<Link to={ "/product/" + product._id } className = { classes.tileTitle }>{ product.name }</Link>}
-                                            subtitle = {<span>$ {product.price}</span>}
-                                            actionIcon = {
-                                                <AddToCart item = {product} />
-                                            }
-                                            />
-                                        </GridListTile>
-                            ))}
-                        </GridList>
-                    </div>) : this.props.searched && (<Typography type = "subheading" components = "h4" className = {classes.title}>No Products found! :</Typography>)
+  render() {
+    const {classes} = this.props
+    return (
+      <div className={classes.root}>
+        {this.props.products.length > 0 ? (
+          <div>
+            <GridList cellHeight={200} className={classes.gridList} cols={3} >
+            {this.props.products.map((product, i) => (
+            <GridListTile key = {i} className = { classes.tile }>
+              <Link to = { "/product/" + product._id }><img className = { classes.image } src = { '/api/product/image/' + product._id } alt = { product.name } /></Link>
+              <GridListTileBar className = { classes.tileBar }
+                title = { <Link to = { "/product/" + product._id } className = { classes.tileTitle } > { product.name } </Link>}
+                subtitle = { <span> $ { product.price } </span>}
+                actionIcon = {
+                  <AddToCart item = { product }/>
                 }
-            </div>
+              />
+            </GridListTile>
+            ))}
+            </GridList>
+          </div>
+        ) : this.props.searched && (
+          <Typography type = "subheading" component = "h4" className = { classes.title } > No Products found!</Typography>
         )
-    }
-}
+        }
+      </div>
+    )
+  }
+}  
 
 Products.propTypes = {
   classes: PropTypes.object.isRequired,
