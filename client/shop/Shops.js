@@ -9,7 +9,33 @@ import Divider from 'material-ui/Divider'
 import {list} from './api-shop.js'
 import {Link} from 'react-router-dom'
 const styles = theme => ({
-
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 3
+  }),
+  title: {
+    margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
+    color: theme.palette.protectedTitle,
+    textAlign: 'center',
+    fontSize: '1.2em'
+  },
+  avatar:{
+    width: 100,
+    height: 100
+  },
+  subheading: {
+    color: theme.palette.text.secondary
+  },
+  shopTitle: {
+    fontSize: '1.2em',
+    marginBottom: '5px'
+  },
+  details: {
+    padding: '24px'
+  }
 })
 class Shops extends Component {
   state = {
