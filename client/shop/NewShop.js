@@ -11,65 +11,56 @@ import {withStyles} from 'material-ui/styles'
 import {create} from './api-shop.js'
 import {Link, Redirect} from 'react-router-dom'
 
-const styles = theme => ({})
+const styles = theme => ({
+
+})
 
 class NewShop extends Component {
-    state = {
-        name: '',
-        description: '',
-        image: '',
-        redirect: false,
-        error: ''
+  state = {
+      name: '',
+      description: '',
+      image: '',
+      redirect: false,
+      error: ''
+  }
+  componentDidMount = () => {
+    this.shopData = new FormData()
+  }
+  handleChange = name => event => {
+    const value = name === 'image'
+      ? event.target.files[0]
+      : event.target.value
+    this.shopData.set(name, value)
+    this.setState({ [name]: value })
+  }
+  clickSubmit = () => {
+    const jwt = auth.isAuthenticated()
+    create({
+      userId: jwt.user._id
+    }, {
+      t: jwt.token
+    }, this.shopData).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({error: '', redirect: true})
+      }
+    })
+  }
+
+  render() {
+    if (this.state.redirect) {
+      return (<Redirect to={'/seller/shops'}/>)
     }
-    componentDidMount = () => {
-        this.shopData = new FormData()
-    }
-    handleChange = name => event => {
-        const value = name === 'image'
-          ? event.target.files[0]
-          : event.target.value
-        this.shopData.set(name, value)
-        this.setState({ [name]: value })
-    }
-    clickSubmit = () => {
-        const jwt = auth.isAuthenticated()
-        create({
-          userId: jwt.user._id
-        }, {
-          t: jwt.token
-        }, this.shopData).then((data) => {
-          if (data.error) {
-            this.setState({error: data.error})
-          } else {
-            this.setState({error: '', redirect: true})
-          }
-        })
-    }
-    render() {
-        if (this.state.redirect) {
-          return (<Redirect to={'/seller/shops'}/>)
-        }
-        const {classes} = this.props
-        return (
-        <div>
-            <Card>
-                <CardContent>
-                    <Typography type="headline" component="h2" className={classes.title}>
-                        New Shop
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
-                    <Link to='/seller/shops' className={classes.submit}><Button variant="raised">Cancel</Button></Link>
-                </CardActions>
-            </Card>
-        </div>
-        )
-    }
+    const {classes} = this.props
+    return (<div>
+
+    </div>)
+  }
 }
 
 NewShop.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 }
-  
+
 export default withStyles(styles)(NewShop)
