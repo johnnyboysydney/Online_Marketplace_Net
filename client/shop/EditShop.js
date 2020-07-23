@@ -113,7 +113,53 @@ class EditShop extends Component {
       return (<Redirect to={'/seller/shops'}/>)
     }
     const {classes} = this.props
-
+    return (<div className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={6} sm={6}>
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography type="headline" component="h2" className={classes.title}>
+                Edit Shop
+              </Typography>
+              <br/>
+              <Avatar src={logoUrl} className={classes.bigAvatar}/><br/>
+              <input accept="image/*" onChange={this.handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
+              <label htmlFor="icon-button-file">
+                <Button variant="raised" color="default" component="span">
+                  Change Logo
+                  <FileUpload/>
+                </Button>
+              </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
+              <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
+              <TextField
+                id="multiline-flexible"
+                label="Description"
+                multiline
+                rows="3"
+                value={this.state.description}
+                onChange={this.handleChange('description')}
+                className={classes.textField}
+                margin="normal"
+              /><br/>
+              <Typography type="subheading" component="h4" className={classes.subheading}>
+                Owner: {this.state.owner}
+              </Typography><br/>
+              {
+                this.state.error && (<Typography component="p" color="error">
+                    <Icon color="error" className={classes.error}>error</Icon>
+                    {this.state.error}
+                  </Typography>)
+              }
+            </CardContent>
+            <CardActions>
+              <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Update</Button>
+            </CardActions>
+          </Card>
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <MyProducts shopId={this.match.params.shopId}/>
+          </Grid>
+        </Grid>
     </div>)
   }
 }
