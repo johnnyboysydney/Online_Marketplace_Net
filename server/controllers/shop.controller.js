@@ -77,8 +77,14 @@ const listByOwner = (req, res) => {
   }).populate('owner', '_id name')
 }
 
-const isOwner = () => {
-
+const isOwner = (req, res, next) => {
+  const isOwner = req.shop && req.auth && req.shop.owner._id == req.auth._id
+  if(!isOwner){
+    return res.status('403').json({
+      error: "User is not authorized"
+    })
+  }
+  next()
 }
 
 const list = (req, res) => {
