@@ -14,72 +14,73 @@ import {Redirect} from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 import MyProducts from './../product/MyProducts'
 
-const styles = theme => ({})
+const styles = theme => ({
+
+})
 
 class EditShop extends Component {
-    constructor({match}) {
-        super()
-        this.state = {
-          name: '',
-          description: '',
-          image: '',
-          redirect: false,
-          error: ''
-        }
-        this.match = match
-      }
-      componentDidMount = () => {}
-      clickSubmit = () => {}
-      handleChange = name => event => {}
+  constructor({match}) {
+    super()
+    this.state = {
+      name: '',
+      description: '',
+      image: '',
+      redirect: false,
+      error: ''
+    }
+    this.match = match
+  }
 
-      render() {
-        const logoUrl = this.state.id
-            ? `/api/shops/logo/${this.state.id}?${new Date().getTime()}`
-            : '/api/shops/defaultphoto'
-        if (this.state.redirect) {
-            return (<Redirect to={'/seller/shops'}/>)
-        }
-        const {classes} = this.props
-        return (
-            <div>
-                <Grid>
-                    <Grid>
-                        <Card>
-                            <CardContent>
-                                <Typography>
-                                    Edit Shop
-                                </Typography>
-                                <br/>
-                                <Avatar />
-                                <input />
-                                <label>
-                                    <Button>
-                                        Change Logo
-                                        <FileUpload />
-                                    </Button>
-                                </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
-                                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
-
-                                <Typography type="subheading" component="h4" className={classes.subheading}>
-                                    Owner: {this.state.owner}
-                                </Typography><br/>
-                            </CardContent>
-                            <CardActions>
-                                <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Update</Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={6} sm={6}>
-                        <MyProducts shopId={this.match.params.shopId}/>
-                    </Grid>
-                </Grid>
-            </div>
-        )
+  componentDidMount = () => {
+    this.shopData = new FormData()
+    const jwt = auth.isAuthenticated()
+    read({
+      shopId: this.match.params.shopId
+    }, {t: jwt.token}).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({id: data._id, name: data.name, description: data.description, owner: data.owner.name})
       }
+    })
+  }
+  clickSubmit = () => {
+    const jwt = auth.isAuthenticated()
+    update({
+      shopId: this.match.params.shopId
+    }, {
+      t: jwt.token
+    }, this.shopData).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({'redirect': true})
+      }
+    })
+  }
+  handleChange = name => event => {
+    const value = name === 'image'
+      ? event.target.files[0]
+      : event.target.value
+    this.shopData.set(name, value)
+    this.setState({ [name]: value })
+  }
+
+  render() {
+    const logoUrl = this.state.id
+          ? `/api/shops/logo/${this.state.id}?${new Date().getTime()}`
+          : '/api/shops/defaultphoto'
+    if (this.state.redirect) {
+      return (<Redirect to={'/seller/shops'}/>)
+    }
+    const {classes} = this.props
+
+    </div>)
+  }
 }
 
 EditShop.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 }
-  
+
 export default withStyles(styles)(EditShop)
