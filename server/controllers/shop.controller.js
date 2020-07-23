@@ -62,8 +62,16 @@ const update = () => {
 
 }
 
-const remove = () => {
-
+const remove = (req, res, next) => {
+  let shop = req.shop
+  shop.remove((err, deletedShop) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(deletedShop)
+  })
 }
 
 const listByOwner = (req, res) => {
