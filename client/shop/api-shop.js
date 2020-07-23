@@ -21,7 +21,17 @@ const list = () => {
 }
 
 const listByOwner = (params, credentials) => {
-
+  return fetch('/api/shops/by/'+params.userId, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    }
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
 }
 
 const read = (params, credentials) => {
