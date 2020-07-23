@@ -83,7 +83,40 @@ class NewShop extends Component {
     }
     const {classes} = this.props
     return (<div>
-
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography type="headline" component="h2" className={classes.title}>
+            New Shop
+          </Typography>
+          <br/>
+          <input accept="image/*" onChange={this.handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
+          <label htmlFor="icon-button-file">
+            <Button variant="raised" color="secondary" component="span">
+              Upload Logo
+              <FileUpload/>
+            </Button>
+          </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
+          <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
+          <TextField
+            id="multiline-flexible"
+            label="Description"
+            multiline
+            rows="2"
+            value={this.state.description}
+            onChange={this.handleChange('description')}
+            className={classes.textField}
+            margin="normal"
+          /><br/> {
+            this.state.error && (<Typography component="p" color="error">
+              <Icon color="error" className={classes.error}>error</Icon>
+              {this.state.error}</Typography>)
+          }
+        </CardContent>
+        <CardActions>
+          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
+          <Link to='/seller/shops' className={classes.submit}><Button variant="raised">Cancel</Button></Link>
+        </CardActions>
+      </Card>
     </div>)
   }
 }
