@@ -142,8 +142,8 @@ const listCategories = (req, res) => {
   })
 }
 
-const list = () => {
-
+const list = (req, res) => {
+  const query = {}
 }
 
 const decreaseQuantity = (req, res, next) => {
