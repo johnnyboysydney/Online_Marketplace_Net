@@ -76,7 +76,7 @@ class Products extends Component {
       </div>
     )
   }
-}  
+}
 
 Products.propTypes = {
   classes: PropTypes.object.isRequired,
