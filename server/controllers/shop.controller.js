@@ -66,8 +66,15 @@ const remove = () => {
 
 }
 
-const listByOwner = () => {
-
+const listByOwner = (req, res) => {
+  Shop.find({owner: req.profile._id}, (err, shops) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(shops)
+  }).populate('owner', '_id name')
 }
 
 const isOwner = () => {
