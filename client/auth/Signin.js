@@ -1,3 +1,4 @@
+// Dependencies and imports
 import React, {useState} from 'react'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -99,9 +100,4 @@ export default function Signin(props) {
     )
 }
 
-Signin.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(Signin)
 
