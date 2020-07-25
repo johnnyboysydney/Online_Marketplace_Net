@@ -99,4 +99,9 @@ export default function Signin(props) {
     )
 }
 
+Signin.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(Signin)
 
