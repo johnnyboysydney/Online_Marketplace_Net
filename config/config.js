@@ -1,12 +1,12 @@
 const config = {
   env: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 3000,
-  jwtSecret: process.env.JWT_SECRET || "YOUR_secret_key",
+  jwtSecret: process.env.JWT_SECRET || "51H6E6yEV0d7rwUXNpphZoFt42839",
   mongoUri: process.env.MONGODB_URI ||
     process.env.MONGO_HOST ||
     'mongodb://' + (process.env.IP || 'localhost') + ':' +
     (process.env.MONGO_PORT || '27017') +
-    '/mernproject',
+    '/online_marketplace',
     stripe_connect_test_client_id: 'YOUR_stripe_connect_test_client',
     stripe_test_secret_key: 'sk_test_51H6E6yEV0d7rwUXNpphZoFt42839vrqg8xgsdAnQcAuSrlxUS1GPRMrwP0gvdaqhgS9PpeESEwZtEorIo5cvaG95003wMGphVr',
     stripe_test_api_key: 'pk_test_51H6E6yEV0d7rwUXNgJU9onIdFyA4BksuQr7yFpFPAUryF7mVd0naFCx1nggH7D7OAZXgCywmBSooD1YOmTZCf1Ir00m1HwJ988'
