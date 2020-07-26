@@ -1,9 +1,7 @@
 'use strict'
+ /* Get unique error field name */
 
-/**
- * Get unique error field name
- */
-const getUniqueErrorMessage = (err) => {
+ const getUniqueErrorMessage = (err) => {
     let output
     try {
         let fieldName = err.message.substring(err.message.lastIndexOf('.$') + 2, err.message.lastIndexOf('_1'))
@@ -15,9 +13,8 @@ const getUniqueErrorMessage = (err) => {
     return output
 }
 
-/**
- * Get the error message from error object
- */
+/* Get the error message from error object */
+
 const getErrorMessage = (err) => {
     let message = ''
 
