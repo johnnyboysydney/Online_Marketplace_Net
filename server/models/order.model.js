@@ -8,7 +8,9 @@ const CartItemSchema = new mongoose.Schema({
     default: 'Not processed',
     enum: ['Not processed' , 'Processing', 'Shipped', 'Delivered', 'Cancelled']}
 })
+
 const CartItem = mongoose.model('CartItem', CartItemSchema)
+
 const OrderSchema = new mongoose.Schema({
   products: [CartItemSchema],
   customer_name: {

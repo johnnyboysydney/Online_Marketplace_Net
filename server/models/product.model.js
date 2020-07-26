@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import crypto from 'crypto'
+
 const ProductSchema = new mongoose.Schema({
   name: {
     type: String,

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import crypto from 'crypto'
+
 const ShopSchema = new mongoose.Schema({
   name: {
     type: String,
