@@ -20,7 +20,6 @@ const create = async (req, res) => {
     })
   }
 }
-
 /* Load user and append to req. */
 const userByID = async (req, res, next, id) => {
   try {
