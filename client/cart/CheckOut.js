@@ -91,6 +91,24 @@ export default function Checkout (){
           <Elements>
             <PlaceOrder checkoutDetails={values.checkoutDetails} />
           </Elements>
+                     {/*
+          <Elements>
+            <NewPlaceOrder checkoutDetails={values.checkoutDetails} />
+          </Elements>
+
+        <Typography type="title" className={classes.title}>
+          Don't forget to place your here!
+        </Typography>
+        <Link to = { '/order/' + values.orderId}>
+          <Button color="secondary" variant="contained" >Place Order</Button>
+        </Link>
+        */}
+        
+        {/*  
+          <Elements>
+            <PlaceOrder checkoutDetails={values.checkoutDetails} />
+          </Elements> 
+        */}
         </div>
       </Card>)
 }
