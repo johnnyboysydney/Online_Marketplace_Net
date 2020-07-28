@@ -73,7 +73,71 @@ export default function NewAuction() {
       })
     }
   }
-
+  if (values.redirect) {
+    return (<Redirect to={'/myauctions'}/>)
+  }
+  return (<div>
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography type="headline" component="h2" className={classes.title}>
+          New Auction
+        </Typography>
+        <br/>
+        <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
+        <label htmlFor="icon-button-file">
+          <Button variant="contained" color="secondary" component="span">
+            Upload Image
+            <FileUpload/>
+          </Button>
+        </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
+        <TextField id="name" label="Item Name" className={classes.textField} value={values.itemName} onChange={handleChange('itemName')} margin="normal"/><br/>
+        <TextField
+          id="multiline-flexible"
+          label="Description"
+          multiline
+          rows="2"
+          value={values.description}
+          onChange={handleChange('description')}
+          className={classes.textField}
+          margin="normal"
+        /><br/>
+        <TextField id="startingBid" label="Starting Bid ($)" className={classes.textField} value={values.startingBid} onChange={handleChange('startingBid')} margin="normal"/><br/>
+        <br/>
+        <TextField
+          id="datetime-local"
+          label="Auction Start Time"
+          type="datetime-local"
+          defaultValue={defaultStartTime}
+          className={classes.textField}
+          onChange={handleChange('bidStart')}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        /><br/>
+        <br/>
+        <TextField
+          id="datetime-local"
+          label="Auction End Time"
+          type="datetime-local"
+          defaultValue={defaultEndTime}
+          className={classes.textField}
+          onChange={handleChange('bidEnd')}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        /><br/> <br/>
+         {
+          values.error && (<Typography component="p" color="error">
+            <Icon color="error" className={classes.error}>error</Icon>
+            {values.error}</Typography>)
+        }
+      </CardContent>
+      <CardActions>
+        <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+        <Link to='/myauctions' className={classes.submit}><Button variant="contained">Cancel</Button></Link>
+      </CardActions>
+    </Card>
+  </div>)
 }
 
 
