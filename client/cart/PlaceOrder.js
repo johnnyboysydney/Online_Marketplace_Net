@@ -89,7 +89,11 @@ const PlaceOrder = (props) => {
       }
   })
 }
-
+  //post to server with cart data
+  //server turns this into an order
+  //returns order id to post request
+  //client then goes to order/orderid
+  //server dynamically displays that page
 
     if (values.redirect) {
       return (<Redirect to={'/order/' + values.orderId}/>)
