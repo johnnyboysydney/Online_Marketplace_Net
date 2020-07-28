@@ -46,5 +46,29 @@ export default function EditShop ({}) {
       abortController.abort()
     }
   }, [])
-  
+  const clickSubmit = () => {
+    if(auction.bidEnd < auction.bidStart){
+      setError("Auction cannot end before it starts")
+    }else{
+      let auctionData = new FormData()
+      auction.itemName && auctionData.append('itemName', auction.itemName)
+      auction.description && auctionData.append('description', auction.description)
+      auction.image && auctionData.append('image', auction.image)
+      auction.startingBid && auctionData.append('startingBid', auction.startingBid)
+      auction.bidStart && auctionData.append('bidStart', auction.bidStart)
+      auction.bidEnd && auctionData.append('bidEnd', auction.bidEnd)
+      
+      update({
+        auctionId: match.params.auctionId
+      }, {
+        t: jwt.token
+      }, auctionData).then((data) => {
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setRedirect(true)
+        }
+      })
+    }
+  }
 }
