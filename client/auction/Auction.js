@@ -11,3 +11,81 @@ import auth from '../auth/auth-helper'
 import Timer from './Timer'
 import Bidding from './Bidding'
 
+
+
+export default function Auction ({match}) {
+  const classes = useStyles()
+  const [auction, setAuction] = useState({})
+  const [error, setError] = useState('')
+  const [justEnded, setJustEnded] = useState(false)
+
+    useEffect(() => {
+      const abortController = new AbortController()
+      const signal = abortController.signal
+  
+      read({auctionId: match.params.auctionId}, signal).then((data) => {
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setAuction(data)
+        }
+      })
+    return function cleanup(){
+      abortController.abort()
+    }
+  }, [match.params.auctionId])
+  const updateBids = (updatedAuction) => {
+    setAuction(updatedAuction)
+  }
+  const update = () => {
+    setJustEnded(true)
+  }
+  const imageUrl = auction._id
+          ? `/api/auctions/image/${auction._id}?${new Date().getTime()}`
+          : '/api/auctions/defaultphoto'
+  const currentDate = new Date()
+    return (
+        <div className={classes.root}>
+              <Card className={classes.card}>
+                <CardHeader
+                  title={auction.itemName}
+                  subheader={<span>
+                    {currentDate < new Date(auction.bidStart) && 'Auction Not Started'}
+                    {currentDate > new Date(auction.bidStart) && currentDate < new Date(auction.bidEnd) && 'Auction Live'}
+                    {currentDate > new Date(auction.bidEnd) && 'Auction Ended'}
+                    </span>}
+                />
+                <Grid container spacing={6}>
+                  <Grid item xs={5} sm={5}>
+                    <CardMedia
+                        className={classes.media}
+                        image={imageUrl}
+                        title={auction.itemName}
+                    />
+                    <Typography component="p" variant="subtitle1" className={classes.subheading}>
+                    About Item</Typography>
+                    <Typography component="p" className={classes.description}>
+                    {auction.description}</Typography>
+                  </Grid>
+                  
+                  <Grid item xs={7} sm={7}>
+                    {currentDate > new Date(auction.bidStart) 
+                    ? (<>
+                        <Timer endTime={auction.bidEnd} update={update}/> 
+                        { auction.bids.length > 0 &&  
+                            <Typography component="p" variant="subtitle1" className={classes.lastBid}>
+                                {` Last bid: $ ${auction.bids[0].bid}`}
+                            </Typography>
+                        }
+                        { !auth.isAuthenticated() && <Typography>Please, <Link to='/signin'>sign in</Link> to place your bid.</Typography> }
+                        { auth.isAuthenticated() && <Bidding auction={auction} justEnded={justEnded} updateBids={updateBids}/> }
+                      </>)
+                    : <Typography component="p" variant="h6">{`Auction Starts at ${new Date(auction.bidStart).toLocaleString()}`}</Typography>}
+                  </Grid>
+           
+                </Grid>
+                
+              </Card>
+
+        </div>)
+}
