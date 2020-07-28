@@ -17,5 +17,18 @@ router.route('/api/auction/:auctionId')
 router.route('/api/auctions/by/:userId')
   .post(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.isSeller, auctionCtrl.create)
   .get(authCtrl.requireSignin, authCtrl.hasAuthorization, auctionCtrl.listBySeller)
-  
+
+router.route('/api/auctions/:auctionId')
+  .put(authCtrl.requireSignin, auctionCtrl.isSeller, auctionCtrl.update)
+  .delete(authCtrl.requireSignin, auctionCtrl.isSeller, auctionCtrl.remove)
+
+router.route('/api/auctions/image/:auctionId')
+  .get(auctionCtrl.photo, auctionCtrl.defaultPhoto)
+
+router.route('/api/auctions/defaultphoto')
+  .get(auctionCtrl.defaultPhoto)
+
+router.param('auctionId', auctionCtrl.auctionByID)
+router.param('userId', userCtrl.userByID)
+
 export default router
