@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
 export default function Home(){
   const classes = useStyles()
   const [suggestionTitle, setSuggestionTitle] = useState("Latest Products")
@@ -64,5 +63,3 @@ export default function Home(){
       </div>
     )
 }
-
-
