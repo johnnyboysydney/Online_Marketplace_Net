@@ -36,7 +36,23 @@ const create = (req, res) => {
     }
   })
 }
-const auctionByID  = () => {}
+
+const auctionByID = async (req, res, next, id) => {
+  try {
+    let auction = await Auction.findById(id).populate('seller', '_id name').populate('bids.bidder', '_id name').exec()
+    if (!auction)
+      return res.status('400').json({
+        error: "Auction not found"
+      })
+    req.auction = auction
+    next()
+  } catch (err) {
+    return res.status('400').json({
+      error: "Could not retrieve auction"
+    })
+  }
+}
+
 const photo = () => {}
 const defaultPhoto = () => {}
 const read = () => {}
