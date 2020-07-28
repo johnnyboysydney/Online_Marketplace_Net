@@ -1,3 +1,4 @@
+// Dependencies
 import Auction from '../models/auction.model'
 import extend from 'lodash/extend'
 import errorHandler from '../helpers/dbErrorHandler'
@@ -5,6 +6,7 @@ import formidable from 'formidable'
 import fs from 'fs'
 import defaultImage from './../../client/assets/images/default.png'
 
+// creating the auction
 const create = (req, res) => {
   let form = new formidable.IncomingForm()
   form.keepExtensions = true
@@ -31,6 +33,7 @@ const create = (req, res) => {
   })
 }
 
+// getting the auction by ID
 const auctionByID = async (req, res, next, id) => {
   try {
     let auction = await Auction.findById(id).populate('seller', '_id name').populate('bids.bidder', '_id name').exec()
@@ -63,6 +66,7 @@ const read = (req, res) => {
   return res.json(req.auction)
 }
 
+// Updating the auction
 const update = (req, res) => {
   let form = new formidable.IncomingForm()
   form.keepExtensions = true
