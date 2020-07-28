@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-
 const AuctionSchema = new mongoose.Schema({
   itemName: {
     type: String,
@@ -38,6 +37,5 @@ const AuctionSchema = new mongoose.Schema({
     time: Date
   }]
 })
-
 
 export default mongoose.model('Auction', AuctionSchema)
