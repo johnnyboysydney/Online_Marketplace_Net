@@ -42,5 +42,15 @@ export default function Bidding (props) {
             })
           }
     }, [])
-    
+    useEffect(() => {
+      socket.on('new bid', payload => {
+        props.updateBids(payload)
+      })
+      return () => {
+          socket.off('new bid')
+      }
+  })
+  const handleChange = event => {
+      setBid(event.target.value)
+  }
 }
