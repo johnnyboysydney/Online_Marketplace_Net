@@ -1,6 +1,5 @@
 'use strict'
  /* Get unique error field name */
-
  const getUniqueErrorMessage = (err) => {
     let output
     try {
@@ -14,7 +13,6 @@
 }
 
 /* Get the error message from error object */
-
 const getErrorMessage = (err) => {
     let message = ''
 
