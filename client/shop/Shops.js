@@ -67,11 +67,11 @@ export default function Shops(){
         </Typography>
         <List dense>
           {shops.map((shop, i) => {
-            return <Link to={"/shops/" + shop._id} key={i}>
+            return <Link to={"/shops/"+shop._id} key={i}>
               <Divider/>
               <ListItem button>
                 <ListItemAvatar>
-                  <Avatar className={classes.avatar}  src = { '/api/shops/logo/'+ shop._id + "?" + new Date().getTime() }/>
+                  <Avatar className={classes.avatar}  src={'/api/shops/logo/'+shop._id+"?" + new Date().getTime()}/>
                 </ListItemAvatar>
                 <div className={classes.details}>
                   <Typography type="headline" component="h2" color="primary" className={classes.shopTitle}>
