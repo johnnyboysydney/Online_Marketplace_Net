@@ -1,4 +1,3 @@
-// Imports and dependencies
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Home from './core/Home'
@@ -21,13 +20,11 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
-
-// Adding future auction imports and dependencies
-// import MyAuctions from './auction/MyAuctions'
-// import OpenAuctions from './auction/OpenAuctions'
-// import NewAuction from './auction/NewAuction'
-// import EditAuction from './auction/EditAuction'
-// import Auction from './auction/Auction'
+import MyAuctions from './auction/MyAuctions'
+import OpenAuctions from './auction/OpenAuctions'
+import NewAuction from './auction/NewAuction'
+import EditAuction from './auction/EditAuction'
+import Auction from './auction/Auction'
 
 const MainRouter = () => {
   return (<div>
@@ -55,11 +52,11 @@ const MainRouter = () => {
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct}/>
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
-        {/* <PrivateRoute path="/myauctions" component={MyAuctions}/>
+        <PrivateRoute path="/myauctions" component={MyAuctions}/>
         <PrivateRoute path="/auction/new" component={NewAuction}/>
         <PrivateRoute path="/auction/edit/:auctionId" component={EditAuction}/>
         <Route path="/auction/:auctionId" component={Auction}/>
-        <Route path="/auctions/all" component={OpenAuctions}/> */}
+        <Route path="/auctions/all" component={OpenAuctions}/>
       </Switch>
     </div>)
 }
