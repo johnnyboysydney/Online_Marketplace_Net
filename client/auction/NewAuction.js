@@ -24,7 +24,31 @@ const getDateString = (date) => {
   return dateString
 }
 
-export default function NewAuction(){}
+export default function NewAuction() {
+  const classes = useStyles()
+  const currentDate = new Date()
+  const defaultStartTime = getDateString(currentDate)
+  const defaultEndTime = getDateString(new Date(currentDate.setHours(currentDate.getHours()+1)))
+  
+  const [values, setValues] = useState({
+      itemName: '',
+      description: '',
+      image: '',
+      bidStart: defaultStartTime,
+      bidEnd: defaultEndTime,
+      startingBid: 0,
+      redirect: false,
+      error: ''
+  })
+  const jwt = auth.isAuthenticated()
+  
+  const handleChange = name => event => {
+    const value = name === 'image'
+      ? event.target.files[0]
+      : event.target.value
+    setValues({...values, [name]: value })
+  }
+}
 
 
 
