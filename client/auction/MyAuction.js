@@ -28,7 +28,6 @@ const useStyles = makeStyles(theme => ({
     marginRight: "8px"
   }
 }))
-
 export default function MyAuctions(){
   const classes = useStyles()
   const [auctions, setAuctions] = useState([])
@@ -79,4 +78,3 @@ export default function MyAuctions(){
       </Paper>
     </div>)
 }
-
