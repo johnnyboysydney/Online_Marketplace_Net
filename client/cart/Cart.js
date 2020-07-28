@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import CartItems from './CartItems'
 import {StripeProvider} from 'react-stripe-elements'
 import config from './../../config/config'
-import Checkout from './Checkout'
+import Checkout from './CheckOut'
 
 const useStyles = makeStyles(theme => ({
   root: {
