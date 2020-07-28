@@ -4,7 +4,7 @@ import errorHandler from './../helpers/dbErrorHandler'
 const create = async (req, res) => {
   try {
     req.body.order.user = req.profile
-    const order = new Order(req.body.order)
+    let order = new Order(req.body.order)
     let result = await order.save()
     res.status(200).json(result)
   } catch (err){
@@ -30,9 +30,9 @@ const listByShop = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    let order = await Order.update({'products._id':req.body.cartItemId}, {'$set': {
+    let order = await Order.updateOne({'products._id':req.body.cartItemId}, {
         'products.$.status': req.body.status
-    }})
+    })
       res.json(order)
   } catch (err){
     return res.status(400).json({
