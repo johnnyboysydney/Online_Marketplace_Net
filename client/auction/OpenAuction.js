@@ -6,7 +6,23 @@ import {listOpen} from './api-auction.js'
 import Auctions from './Auctions'
 
 const useStyles = makeStyles(theme => ({
-
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(5)
+  }),
+  title: {
+    margin: `${theme.spacing(1)}px 0 4px ${theme.spacing(1)}px` ,
+    color: theme.palette.protectedTitle,
+    fontSize: '1.2em'
+  },
+  addButton:{
+    float:'right'
+  },
+  leftIcon: {
+    marginRight: "8px"
+  }
 }))
 
 export default function OpenAuctions(){
