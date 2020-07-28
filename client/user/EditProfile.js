@@ -49,6 +49,7 @@ export default function EditProfile({ match }) {
       name: '',
       email: '',
       password: '',
+      image: '',
       seller: false,
       redirectToProfile: false,
       error: ''
@@ -78,6 +79,7 @@ export default function EditProfile({ match }) {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
+      image: values.image || undefined,
       seller: values.seller || undefined
     }
     update({
