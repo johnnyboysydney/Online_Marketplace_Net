@@ -21,7 +21,7 @@ const auth = {
     cb()
     //optional
     signout().then((data) => {
-      document.cookie = "t=; expires=Thu, 01 Jan 2021 00:00:00 UTC; path=/;"
+      document.cookie = "t=; expires=Thu, 01 Jan 2022 00:00:00 UTC; path=/;"
     })
   },
   updateUser(user, cb) {
