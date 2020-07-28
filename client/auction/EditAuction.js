@@ -27,4 +27,24 @@ export default function EditShop ({}) {
     let dateString = `${year}-${month}-${day}T${hours}:${minutes}`
     return dateString
   }
+  const jwt = auth.isAuthenticated()
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+    read({
+      auctionId: match.params.auctionId
+    }, signal).then((data) => {
+      if (data.error) {
+        setError(data.error)
+      } else {
+        data.bidEnd = getDateString(new Date(data.bidEnd))
+        data.bidStart = getDateString(new Date(data.bidStart))
+        setAuction(data)
+      }
+    })
+    return function cleanup(){
+      abortController.abort()
+    }
+  }, [])
+  
 }
