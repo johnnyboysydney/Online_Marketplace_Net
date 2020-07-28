@@ -37,6 +37,29 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+// Commented out hardcoding stripe elements.
+/*   
+    var stripe = require('stripe')('sk_test_51H6E6yEV0d7rwUXNpphZoFt42839vrqg8xgsdAnQcAuSrlxUS1GPRMrwP0gvdaqhgS9PpeESEwZtEorIo5cvaG95003wMGphVr');
+  
+    stripe.tokens.create(
+      {
+        card: {
+          number: '4242424242424242',
+          exp_month: 7,
+          exp_year: 2022,
+          cvc: '314',
+        },
+      },
+      function(err, token) {
+        // asynchronously called
+        console.log(err)
+        console.log(token)
+      }
+    );
+ */
+
+// Commentining out Stripe, although working, I still need more time to get the stripe to return the token and the OAuth
+
 const PlaceOrder = (props) => {
   const classes = useStyles()
   const [values, setValues] = useState({
