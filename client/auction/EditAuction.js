@@ -71,4 +71,17 @@ export default function EditShop ({}) {
       })
     }
   }
+  const handleChange = name => event => {
+    const value = name === 'image'
+      ? event.target.files[0]
+      : event.target.value
+    setAuction({...auction,  [name]: value })
+  }
+
+    const logoUrl = auction._id
+          ? `/api/auctions/image/${auction._id}?${new Date().getTime()}`
+          : '/api/auctions/defaultphoto'
+    if (redirect) {
+      return (<Redirect to={'/myauctions'}/>)
+    }
 }
