@@ -79,7 +79,7 @@ const remove = async (params, credentials) => {
 
 const stripeUpdate = async (params, credentials, auth_code, signal) => {
   try {
-    let response = await fetch ('/api/stripe_auth/'+ params.userId, {
+    let response = await fetch ('/api/stripe_auth/'+params.userId, {
       method: 'PUT',
       signal: signal,
       headers: {
