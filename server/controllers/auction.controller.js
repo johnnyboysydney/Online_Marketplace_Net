@@ -56,9 +56,57 @@ const auctionByID = async (req, res, next, id) => {
 const photo = () => {}
 const defaultPhoto = () => {}
 const read = () => {}
-const update = () => {}
-const remove = () => {}
-const listOpen = () => {}
+
+const update = (req, res) => {
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      res.status(400).json({
+        message: "Photo could not be uploaded"
+      })
+    }
+    let auction = req.auction
+    auction = extend(auction, fields)
+    auction.updated = Date.now()
+    if(files.image){
+      auction.image.data = fs.readFileSync(files.image.path)
+      auction.image.contentType = files.image.type
+    }
+    try {
+      let result = await auction.save()
+      res.json(result)
+    }catch (err){
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+  })
+}
+
+const remove = async (req, res) => {
+  try {
+    let auction = req.auction
+    let deletedAuction = auction.remove()
+    res.json(deletedAuction)
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }  
+}
+
+const listOpen = async (req, res) => {
+  try {
+    let auctions = await Auction.find({ 'bidEnd': { $gt: new Date() }}).sort('bidStart').populate('seller', '_id name').populate('bids.bidder', '_id name')
+    res.json(auctions)
+  } catch (err){
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
+
 const listBySeller = () => {}
 const listByBidder = () => {}
 const isSeller = () => {}
@@ -76,6 +124,3 @@ export default {
   isSeller,
   remove
 }
-
-
-
