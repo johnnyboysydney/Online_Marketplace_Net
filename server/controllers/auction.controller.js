@@ -1,15 +1,9 @@
-// I will be creating similar functions as in product.controller:
-// create, photo, defaultphoto, read, update, remove, listbyseller
-// And will create new ones for the auction:
-// auctionbyID, listbybidder.
 import Auction from '../models/auction.model'
 import extend from 'lodash/extend'
 import errorHandler from '../helpers/dbErrorHandler'
 import formidable from 'formidable'
 import fs from 'fs'
 import defaultImage from './../../client/assets/images/default.png'
-
-
 
 const create = (req, res) => {
   let form = new formidable.IncomingForm()
@@ -53,9 +47,21 @@ const auctionByID = async (req, res, next, id) => {
   }
 }
 
-const photo = () => {}
-const defaultPhoto = () => {}
-const read = () => {}
+const photo = (req, res, next) => {
+  if(req.auction.image.data){
+    res.set("Content-Type", req.auction.image.contentType)
+    return res.send(req.auction.image.data)
+  }
+  next()
+}
+const defaultPhoto = (req, res) => {
+  return res.sendFile(process.cwd()+defaultImage)
+}
+
+const read = (req, res) => {
+  req.auction.image = undefined
+  return res.json(req.auction)
+}
 
 const update = (req, res) => {
   let form = new formidable.IncomingForm()
@@ -106,6 +112,7 @@ const listOpen = async (req, res) => {
     })
   }
 }
+
 
 const listBySeller = async (req, res) => {
   try {
