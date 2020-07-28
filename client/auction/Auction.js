@@ -11,7 +11,59 @@ import auth from '../auth/auth-helper'
 import Timer from './Timer'
 import Bidding from './Bidding'
 
-
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    margin: 60,
+  },
+  flex:{
+    display:'flex'
+  },
+  card: {
+    padding:'24px 40px 40px'
+  },
+  subheading: {
+    margin: '16px',
+    color: theme.palette.openTitle
+  },
+  description: {
+    margin: '16px',
+    fontSize: '0.9em',
+    color: '#4f4f4f'
+  },
+  price: {
+    padding: '16px',
+    margin: '16px 0px',
+    display: 'flex',
+    backgroundColor: '#93c5ae3d',
+    fontSize: '1.3em',
+    color: '#375a53',
+  },
+  media: {
+    height: 300,
+    display: 'inline-block',
+    width: '100%',
+  },
+  icon: {
+    verticalAlign: 'sub'
+  },
+  link:{
+    color: '#3e4c54b3',
+    fontSize: '0.9em'
+  },
+  itemInfo:{
+      width: '35%',
+      margin: '16px'
+  },
+  bidSection: {
+      margin: '20px',
+      minWidth: '50%'
+  },
+  lastBid: {
+    color: '#303030',
+    margin: '16px',
+  }
+}))
 
 export default function Auction ({match}) {
   const classes = useStyles()
