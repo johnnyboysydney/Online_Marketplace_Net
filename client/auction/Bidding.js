@@ -64,5 +64,40 @@ export default function Bidding (props) {
         bidInfo:  newBid
     })
     setBid('')
-}
+  }
+  const minBid = props.auction.bids && props.auction.bids.length> 0 ? props.auction.bids[0].bid : props.auction.startingBid
+  return(
+      <div>
+          {!props.justEnded && new Date() < new Date(props.auction.bidEnd) && <div className={classes.placeForm}>
+              <TextField id="bid" label="Your Bid ($)"  
+                      value={bid} onChange={handleChange} 
+                      type="number" margin="normal"
+                      helperText={`Enter $${Number(minBid)+1} or more`}
+                      className={classes.marginInput}/><br/>
+              <Button variant="contained" className={classes.marginBtn} color="secondary" disabled={bid < (minBid + 1)} onClick={placeBid} >Place Bid</Button><br/>
+          </div>}
+          <div className={classes.bidHistory}>
+              <Typography variant="h6">All bids</Typography><br/>
+              <Grid container spacing={4}>
+                  <Grid item xs={3} sm={3}>
+                      <Typography variant="subtitle1" color="primary">Bid Amount</Typography>
+                  </Grid>
+                  <Grid item xs={5} sm={5}>
+                      <Typography variant="subtitle1" color="primary">Bid Time</Typography>
+                  </Grid>
+                  <Grid item xs={4} sm={4}>
+                      <Typography variant="subtitle1" color="primary">Bidder</Typography>
+                  </Grid>
+              </Grid>    
+                  {props.auction.bids.map((item, index) => {
+                      return <Grid container spacing={4} key={index}>
+                          <Grid item xs={3} sm={3}><Typography variant="body2">${item.bid}</Typography></Grid>
+                          <Grid item xs={5} sm={5}><Typography variant="body2">{new Date(item.time).toLocaleString()}</Typography></Grid>
+                          <Grid item xs={4} sm={4}><Typography variant="body2">{item.bidder.name}</Typography></Grid>
+                      </Grid>
+                  })}
+              
+          </div>
+      </div>
+  )
 }
