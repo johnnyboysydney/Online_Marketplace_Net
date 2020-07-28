@@ -27,7 +27,7 @@ const Menu = withRouter(({history}) => (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="h6" color="inherit">
-        MERN Marketplace
+        Online Marketplace Net
       </Typography>
       <div>
         <Link to="/">
