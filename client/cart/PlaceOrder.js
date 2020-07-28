@@ -37,29 +37,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-// Commented out hardcoding stripe elements.
-/*   
-    var stripe = require('stripe')('sk_test_51H6E6yEV0d7rwUXNpphZoFt42839vrqg8xgsdAnQcAuSrlxUS1GPRMrwP0gvdaqhgS9PpeESEwZtEorIo5cvaG95003wMGphVr');
-  
-    stripe.tokens.create(
-      {
-        card: {
-          number: '4242424242424242',
-          exp_month: 7,
-          exp_year: 2022,
-          cvc: '314',
-        },
-      },
-      function(err, token) {
-        // asynchronously called
-        console.log(err)
-        console.log(token)
-      }
-    );
- */
-
-// Commentining out Stripe, although working, I still need more time to get the stripe to return the token and the OAuth
-
 const PlaceOrder = (props) => {
   const classes = useStyles()
   const [values, setValues] = useState({
@@ -89,51 +66,47 @@ const PlaceOrder = (props) => {
       }
   })
 }
-  //post to server with cart data
-  //server turns this into an order
-  //returns order id to post request
-  //client then goes to order/orderid
-  //server dynamically displays that page
 
-  if (values.redirect) {
-    return (<Redirect to={'/order/' + values.orderId}/>)
-  }
-  return (
-  <span>
-    <Typography type="subheading" component="h3" className={classes.subheading}>
-      Card details
-    </Typography>
-    <CardElement
-      className={classes.StripeElement}
-        {...{style: {
-                      base: {
-                        color: '#424770',
-                        letterSpacing: '0.025em',
-                        fontFamily: 'Source Code Pro, Menlo, monospace',
-                        '::placeholder': {
-                          color: '#aab7c4',
+
+    if (values.redirect) {
+      return (<Redirect to={'/order/' + values.orderId}/>)
+    }
+    return (
+    <span>
+      <Typography type="subheading" component="h3" className={classes.subheading}>
+        Card details
+      </Typography>
+      <CardElement
+        className={classes.StripeElement}
+          {...{style: {
+                        base: {
+                          color: '#424770',
+                          letterSpacing: '0.025em',
+                          fontFamily: 'Source Code Pro, Menlo, monospace',
+                          '::placeholder': {
+                            color: '#aab7c4',
+                          },
                         },
-                      },
-                      invalid: {
-                        color: '#9e2146',
-                      },
-                    }
-        }}
-    />
-    <div className={classes.checkout}>
-      { values.error &&
-        (<Typography component="span" color="error" className={classes.error}>
-          <Icon color="error" className={classes.errorIcon}>error</Icon>
-            {values.error}
-        </Typography>)
-      }
-      <Button color="secondary" variant="contained" onClick={placeOrder}>Place Order</Button>
-    </div>
-  </span>)
+                        invalid: {
+                          color: '#9e2146',
+                        },
+                      }
+          }}
+      />
+      <div className={classes.checkout}>
+        { values.error &&
+          (<Typography component="span" color="error" className={classes.error}>
+            <Icon color="error" className={classes.errorIcon}>error</Icon>
+              {values.error}
+          </Typography>)
+        }
+        <Button color="secondary" variant="contained" onClick={placeOrder}>Place Order</Button>
+      </div>
+    </span>)
 
 }
 PlaceOrder.propTypes = {
-checkoutDetails: PropTypes.object.isRequired
+  checkoutDetails: PropTypes.object.isRequired
 }
 
 export default injectStripe(PlaceOrder)
