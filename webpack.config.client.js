@@ -11,6 +11,9 @@ const config = {
         'webpack-hot-middleware/client?reload=true',
         path.join(CURRENT_WORKING_DIR, 'client/main.js')
     ],
+    node: {
+        fs: 'empty'
+    },
     output: {
         path: path.join(CURRENT_WORKING_DIR , '/dist'),
         filename: 'bundle.js',
