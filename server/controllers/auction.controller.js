@@ -107,9 +107,36 @@ const listOpen = async (req, res) => {
   }
 }
 
-const listBySeller = () => {}
-const listByBidder = () => {}
-const isSeller = () => {}
+const listBySeller = async (req, res) => {
+  try {
+    let auctions = await Auction.find({seller: req.profile._id}).populate('seller', '_id name').populate('bids.bidder', '_id name')
+    res.json(auctions)
+  } catch (err){
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
+const listByBidder = async (req, res) => {
+  try {
+    let auctions = await Auction.find({'bids.bidder': req.profile._id}).populate('seller', '_id name').populate('bids.bidder', '_id name')
+    res.json(auctions)
+  } catch (err){
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
+
+const isSeller = (req, res, next) => {
+  const isSeller = req.auction && req.auth && req.auction.seller._id == req.auth._id
+  if(!isSeller){
+    return res.status('403').json({
+      error: "User is not authorized"
+    })
+  }
+  next()
+}
 
 export default {
   create,
