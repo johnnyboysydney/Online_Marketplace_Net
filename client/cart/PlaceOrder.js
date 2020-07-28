@@ -95,45 +95,45 @@ const PlaceOrder = (props) => {
   //client then goes to order/orderid
   //server dynamically displays that page
 
-    if (values.redirect) {
-      return (<Redirect to={'/order/' + values.orderId}/>)
-    }
-    return (
-    <span>
-      <Typography type="subheading" component="h3" className={classes.subheading}>
-        Card details
-      </Typography>
-      <CardElement
-        className={classes.StripeElement}
-          {...{style: {
-                        base: {
-                          color: '#424770',
-                          letterSpacing: '0.025em',
-                          fontFamily: 'Source Code Pro, Menlo, monospace',
-                          '::placeholder': {
-                            color: '#aab7c4',
-                          },
+  if (values.redirect) {
+    return (<Redirect to={'/order/' + values.orderId}/>)
+  }
+  return (
+  <span>
+    <Typography type="subheading" component="h3" className={classes.subheading}>
+      Card details
+    </Typography>
+    <CardElement
+      className={classes.StripeElement}
+        {...{style: {
+                      base: {
+                        color: '#424770',
+                        letterSpacing: '0.025em',
+                        fontFamily: 'Source Code Pro, Menlo, monospace',
+                        '::placeholder': {
+                          color: '#aab7c4',
                         },
-                        invalid: {
-                          color: '#9e2146',
-                        },
-                      }
-          }}
-      />
-      <div className={classes.checkout}>
-        { values.error &&
-          (<Typography component="span" color="error" className={classes.error}>
-            <Icon color="error" className={classes.errorIcon}>error</Icon>
-              {values.error}
-          </Typography>)
-        }
-        <Button color="secondary" variant="contained" onClick={placeOrder}>Place Order</Button>
-      </div>
-    </span>)
+                      },
+                      invalid: {
+                        color: '#9e2146',
+                      },
+                    }
+        }}
+    />
+    <div className={classes.checkout}>
+      { values.error &&
+        (<Typography component="span" color="error" className={classes.error}>
+          <Icon color="error" className={classes.errorIcon}>error</Icon>
+            {values.error}
+        </Typography>)
+      }
+      <Button color="secondary" variant="contained" onClick={placeOrder}>Place Order</Button>
+    </div>
+  </span>)
 
 }
 PlaceOrder.propTypes = {
-  checkoutDetails: PropTypes.object.isRequired
+checkoutDetails: PropTypes.object.isRequired
 }
 
 export default injectStripe(PlaceOrder)
