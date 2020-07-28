@@ -53,4 +53,16 @@ export default function Bidding (props) {
   const handleChange = event => {
       setBid(event.target.value)
   }
+  const placeBid = () => {
+    let newBid = {
+        bid: bid,
+        time: new Date(),
+        bidder: jwt.user
+    }
+    socket.emit('new bid', {
+        room: props.auction._id,
+        bidInfo:  newBid
+    })
+    setBid('')
+}
 }
