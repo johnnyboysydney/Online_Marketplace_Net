@@ -79,7 +79,6 @@ export default function EditProfile({ match }) {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      image: values.image || undefined,
       seller: values.seller || undefined
     }
     update({
@@ -112,6 +111,12 @@ export default function EditProfile({ match }) {
           <Typography variant="h6" className={classes.title}>
             Edit Profile
           </Typography>
+          {/*
+          <br />
+          <Image src={logoUrl} className={classes.image}/><br/>
+              <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
+              <label htmlFor="icon-button-file"></label>
+          */}
           <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
