@@ -28,4 +28,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Bidding (props) {}
+export default function Bidding (props) {
+  const classes = useStyles()
+    const [bid, setBid] = useState('')
+
+    const jwt = auth.isAuthenticated()
+
+    useEffect(() => {
+        socket.emit('join auction room', {room: props.auction._id})
+        return () => {
+            socket.emit('leave auction room', {
+              room: props.auction._id
+            })
+          }
+    }, [])
+    
+}
