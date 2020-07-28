@@ -48,6 +48,32 @@ export default function NewAuction() {
       : event.target.value
     setValues({...values, [name]: value })
   }
+  const clickSubmit = () => {
+    if(values.bidEnd < values.bidStart){
+      setValues({...values, error: "Auction cannot end before it starts"})
+    }
+    else{
+      let auctionData = new FormData()
+      values.itemName && auctionData.append('itemName', values.itemName)
+      values.description && auctionData.append('description', values.description)
+      values.image && auctionData.append('image', values.image)
+      values.startingBid && auctionData.append('startingBid', values.startingBid)
+      values.bidStart && auctionData.append('bidStart', values.bidStart)
+      values.bidEnd && auctionData.append('bidEnd', values.bidEnd)
+      create({
+        userId: jwt.user._id
+      }, {
+        t: jwt.token
+      }, auctionData).then((data) => {
+        if (data.error) {
+          setValues({...values, error: data.error})
+        } else {
+          setValues({...values, error: '', redirect: true})
+        }
+      })
+    }
+  }
+
 }
 
 
