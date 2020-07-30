@@ -54,7 +54,7 @@ To use this application locally:
 
 ## Demo
 
-![Demo](./public/assets/demo/demo.gif)
+![Demo](./assets/demo.gif)
 
 ### Screenshots
 
