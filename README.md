@@ -54,7 +54,7 @@ To use this application locally:
 
 ## Demo
 
-![Demo](./assets/demo.gif)
+![Demo](https://github.com/johnnyboysydney/Online_Marketplace_Net/tree/master/Assets/demo.gif)
 
 ### Screenshots
 
