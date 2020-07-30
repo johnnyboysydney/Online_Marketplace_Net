@@ -87,7 +87,8 @@ Yes, you can modify and refractor the code
 
 ## Acknowledgments
 
-- John "To my sons and daughters, who give me the power I need to keep going."
+- John "To my sons and daughters, who give me the power I need to keep going,  
+And to the Love of my life who has endured the struggle, the journey, every step of the way, every day."
 
 ### Author
 
