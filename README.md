@@ -4,7 +4,7 @@
 [contributors-url]: https://github.com/johnnyboysydney/Online_Marketplace_Net/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/johnnyboysydney/Online_Marketplace_Net.svg?style=flat-square
 [forks-url]: https://github.com/johnnyboysydney/Online_Marketplace_Net/network
-[stars-shield]: https://img.shields.io/github/stars/Online_Marketplace_Net/Portfolio_React.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/johnnyboysydney/Online_Marketplace_Net.svg?style=flat-square
 [stars-url]: https://github.com/johnnyboysydney/Online_Marketplace_Net/stargazers
 [issues-shield]: https://img.shields.io/github/issues/johnnyboysydney/Online_Marketplace_Net.svg?style=flat-square
 [issues-url]: https://github.com/johnnyboysydney/Online_Marketplace_Net/issues
