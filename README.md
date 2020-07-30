@@ -54,7 +54,7 @@ To use this application locally:
 
 ## Demo
 
-![Demo](./public/assets/demo/demo.gif)
+![demo](https://user-images.githubusercontent.com/54227198/88880106-417aef80-d26f-11ea-9253-f3d50784591c.gif)
 
 ### Screenshots
 
