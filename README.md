@@ -32,6 +32,8 @@
 
 ## Link to the running application
 
+https://online-marketplace-net.herokuapp.com/
+
 ## Description
 
 The Online Marketplace Net is a place where you can catch bargains from your favourite store online!
@@ -58,6 +60,10 @@ To use this application locally:
 
 ![Screenshot1]()
 ![Screenshot1]()
+
+### Tests
+
+Work in progress
 
 ### Built with
 
