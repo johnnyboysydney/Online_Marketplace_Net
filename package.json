@@ -12,6 +12,9 @@
     "mern",
     "marketplace"
   ],
+  "directories": {
+    "test": "test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnnyboysydney/Online_Marketplace_Net.git"
@@ -22,6 +25,7 @@
   "homepage": "https://github.com/johnnyboysydney/Online_Marketplace_Net",
   "main": "./dist/server.generated.js",
   "scripts": {
+    "test": "mocha",
     "dev": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "start": "NODE_ENV=production node ./dist/server.generated.js"
@@ -35,7 +39,9 @@
     "@babel/preset-env": "7.9.0",
     "@babel/preset-react": "7.9.4",
     "babel-loader": "8.1.0",
+    "chai": "^4.2.0",
     "file-loader": "6.0.0",
+    "mocha": "^8.0.1",
     "nodemon": "2.0.2",
     "webpack": "4.42.1",
     "webpack-cli": "3.3.11",
